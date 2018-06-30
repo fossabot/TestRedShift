@@ -82,10 +82,10 @@ var self=this;
 slider.noUiSlider.on('end', function( values, handle ) {
 
 		if(handle){
-        max.value=parseInt(values[1].toString(),10);
+        max.value=parseInt(values[1].toString(),10).toString(10);
     }
     else{
-      min.value= parseInt(values[0].toString(),10);
+      min.value= parseInt(values[0].toString(),10).toString(10);
     }
     self.findData(values[0],values[1]);
 	
@@ -102,8 +102,10 @@ slider.noUiSlider.on('end', function( values, handle ) {
    
   }
   findData(min: number, max: number){
-      
-      this.searchTime.emit(new FindBetween(min, max));
+      var f= new FindBetween();
+      f.fromDate = min;
+      f.toDate = max;
+      this.searchTime.emit(f);
       
     
   }

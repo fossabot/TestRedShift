@@ -44,15 +44,23 @@ namespace Ant.Controllers
             memoryCache.Set(name, ret);
             return ret;
         }
-        [HttpGet("{min}/{max}")]
-        public async Task<FindBetweenResult[]> Find(int max, int min)
+        [HttpPost]
+        public async Task<FindBetweenResult[]> Find([FromBody]FindBetween f)
         {
-            string name = max + nameof(Find) + min ;
+            if (f?.IsValid() != true)
+                return new[]{new  FindBetweenResult()
+                {
+                        Name  = " NO SEARCH"
+                }
+                };
+
+            string name = f.FromDate + nameof(Find) + f.ToDate + "_"+f.term;
+    
             if (memoryCache.TryGetValue(name, out FindBetweenResult[] ret))
             {
                 return ret;
             }
-            ret = await p.Find(new FindBetween(min, max));
+            ret = await p.Find(f);
             memoryCache.Set(name, ret);
             return ret;
         }

@@ -2,7 +2,7 @@
   <mat-sidenav autosize #drawer class="sidenav" fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">Antiques</mat-toolbar>
-    <app-title></app-title>
+    <app-title (searchString)="onSearchTitle($event)"  ></app-title>
     <br />
 
     <br />

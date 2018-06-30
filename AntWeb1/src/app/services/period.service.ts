@@ -10,7 +10,7 @@ const httpOptions = {
 };
  
 
-@Injectable()
+@Injectable() 
 export class PeriodService {
 
   private periodApi: string = 'api/Period/';
@@ -26,9 +26,9 @@ export class PeriodService {
   }
   findData(f :FindBetween ):Observable<FindBetweenResult[]>{
 
-    const url = environment.urlApi +  this.periodApi + 'Find/'+ f.fromDate + '/'+ f.toDate ;    
-    
-    return this.http.get<FindBetweenResult[]>(url);
+    const url = environment.urlApi +  this.periodApi + 'Find';    
+    //window.alert(JSON.stringify(f));
+    return this.http.post<FindBetweenResult[]>(url, f,httpOptions);
 
   }
 }
