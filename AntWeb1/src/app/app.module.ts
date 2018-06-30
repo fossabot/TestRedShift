@@ -1,0 +1,69 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+
+import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MyNavComponent } from './my-nav/my-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatAccordion, MatExpansionModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatGridListModule, MatInputModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSliderModule, MatTooltipModule, MatTabsModule, MatTableModule, MatStepperModule, MatSortModule, MatSnackBarModule, MatSlideToggleModule, MatTreeModule } from '@angular/material';
+import { TitleComponent } from './title/title.component';
+import { PeriodSearcherComponent } from './period-searcher/period-searcher.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { PeriodService } from './services/period.service';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    MyNavComponent,
+    TitleComponent,
+    PeriodSearcherComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    
+    FormsModule,
+     HttpClientModule,
+     MatAutocompleteModule,
+     MatBadgeModule,
+     MatBottomSheetModule,
+     MatButtonModule,
+     MatButtonToggleModule,
+     MatCardModule,
+     MatCheckboxModule,
+     MatChipsModule,
+     MatDatepickerModule,
+     MatDialogModule,
+     MatDividerModule,
+     MatExpansionModule,
+     MatGridListModule,
+     MatIconModule,
+     MatInputModule,
+     MatListModule,
+     MatMenuModule,
+     MatNativeDateModule,
+     MatPaginatorModule,
+     MatProgressBarModule,
+     MatProgressSpinnerModule,
+     MatRadioModule,
+     MatRippleModule,
+     MatSelectModule,
+     MatSidenavModule,
+     MatSliderModule,
+     MatSlideToggleModule,
+     MatSnackBarModule,
+     MatSortModule,
+     MatStepperModule,
+     MatTableModule,
+     MatTabsModule,
+     MatToolbarModule,
+     MatTooltipModule,
+     MatTreeModule,
+     
+  ],
+  providers: [PeriodService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

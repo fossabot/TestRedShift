@@ -16,4 +16,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AntBL\AntBL.csproj" />
+    <ProjectReference Include="..\AntDAL\AntDAL.csproj" />
+  </ItemGroup>
+
 </Project>
