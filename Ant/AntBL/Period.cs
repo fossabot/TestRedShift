@@ -30,5 +30,10 @@ namespace AntBL
 
 
         }
+
+        public async Task<GenericData[]> FindCountries()
+        {
+            return await t.FindCountries();
+        }
     }
 }

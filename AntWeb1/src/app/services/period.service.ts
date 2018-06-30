@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Interval, FindBetween, FindBetweenResult } from '../classes/interval';
+import { Interval, FindBetween, FindBetweenResult, GenericData, Country } from '../classes/interval';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
@@ -30,5 +30,9 @@ export class PeriodService {
     //window.alert(JSON.stringify(f));
     return this.http.post<FindBetweenResult[]>(url, f,httpOptions);
 
+  }
+  findCountries():Observable<Country[]>{
+    const url = environment.urlApi +  this.periodApi + 'countries';    
+    return this.http.get<Country[]>(url);
   }
 }

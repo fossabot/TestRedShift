@@ -8,17 +8,33 @@ export class Interval<T> {
     
  
 }
+export class GenericData{
+    public id:number;
+    public name:string;
+}
+export class Country extends GenericData{
+
+    constructor() {
+
+        super();
+        this.id = -1;
+    }
+    public numberAuthors:number ;
+        
+}
 export class FindBetweenResult {
     fromDate: number;
     toDate: number;
     id: number;
     name: string;
+    
 }
 export class FindBetween{
     constructor() {
         // this.fromDate = parseInt(fromDate.toString(10),10);
         // this.toDate = 
     }
+    public countryId:number;
     public  term: string;
     public get fromDate(): number  {
         if(this.FromDate == null)

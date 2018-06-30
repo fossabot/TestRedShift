@@ -1,0 +1,11 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Pick Country" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="itemSelected($event.option.value)">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        <!-- <mat-icon matBadge="{{option.numberAuthors}}" matBadgeSize="small" matBadgeOverlap="false">{{ option.name }}</mat-icon> -->
+        <span matBadge="{{option.numberAuthors}}" matBadgeOverlap="false">{{ option.name }}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

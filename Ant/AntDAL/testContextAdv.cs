@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AntDAL.Models
@@ -7,6 +8,7 @@ namespace AntDAL.Models
     public class FindBetween
     {
         public string term { get; set; }
+        public int countryId { get; set; }
         public FindBetween()
         {
 
@@ -28,7 +30,8 @@ namespace AntDAL.Models
                 return true;
             if (!string.IsNullOrWhiteSpace(term))
                 return true;
-
+            if (this.countryId > 0)
+                return true;
             return false;
         }
     }
@@ -39,15 +42,33 @@ namespace AntDAL.Models
         public long Id { get; set; }
         public string Name { get; set; }
     }
+    public class Country:GenericData
+    {
+        public int NumberAuthors { get; set; }
+    }
+    public class GenericData
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+    
     public partial class testContext : DbContext
     {
         public virtual DbSet<FindBetweenResult> FindBetweenResult { get; set; }
+        public virtual DbSet<Country> Country { get; set; }
         public async Task<FindBetweenResult[]> Find(FindBetween f)
         {
              
-            var data= await this.FindBetweenResult.FromSql($"exec findBetweenDates {f.FromDate} ,{f.ToDate}, { f.term}" ).ToArrayAsync();
+            var data= await this.FindBetweenResult.FromSql($"exec findBetweenDates {f.FromDate} ,{f.ToDate}, { f.term} , {f.countryId}" ).ToArrayAsync();
             return data;
 
+
+        }
+
+        public async Task<Country[]> FindCountries()
+        {
+            var data = await this.Country.FromSql($"exec GetCountries").ToArrayAsync();
+            return data;
 
         }
     }

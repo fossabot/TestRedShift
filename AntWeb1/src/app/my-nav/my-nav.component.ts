@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable, of, interval } from 'rxjs';
-import { map, finalize, delay, timeInterval, take, takeWhile } from 'rxjs/operators';
-import { FindBetween, FindBetweenResult } from '../classes/interval';
+import { map, finalize, delay, timeInterval, take, takeWhile, count } from 'rxjs/operators';
+import { FindBetween, FindBetweenResult, Country } from '../classes/interval';
 import { PeriodService } from '../services/period.service';
 
 @Component({
@@ -17,6 +17,7 @@ export class MyNavComponent {
 
   public searchTitle: string;
   public searchBetween: FindBetween;
+  public searchCountry: Country;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -24,7 +25,12 @@ export class MyNavComponent {
     );
     
   constructor(private breakpointObserver: BreakpointObserver, private ps: PeriodService) {}
+  public onCountrySelected(country:Country){
+    
+    this.searchCountry= country;
+    this.search();
 
+  }
   public onSearchTitle(term:string){
     console.log(" in search title" + term);
     this.searchTitle = term;
@@ -39,12 +45,16 @@ export class MyNavComponent {
       this.found=[];
       this.doAdd=false;
       var mess='';
-      var search=new FindBetween()
+      var search=new FindBetween();
       if(this.searchBetween != null){
         mess +="finding from year " + this.searchBetween.fromDate + " to year " + this.searchBetween.toDate ;
         search.fromDate = this.searchBetween.fromDate;
         search.toDate = this.searchBetween.toDate;
       }
+      if(this.searchCountry.id > 0){
+        mess += 'in country ' + this.searchCountry.name;
+      }
+      search.countryId=this.searchCountry.id || -1;
       
       this.searchTitle = this.searchTitle ||'';
       if(this.searchTitle.length > 0){

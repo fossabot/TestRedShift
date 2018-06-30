@@ -44,6 +44,17 @@ namespace Ant.Controllers
             memoryCache.Set(name, ret);
             return ret;
         }
+        public async ValueTask<GenericData[]> Countries()
+        {
+            string name = nameof(Countries) ;
+            if (memoryCache.TryGetValue(name, out GenericData[] ret))
+            {
+                return ret;
+            }
+            ret = await p.FindCountries();
+            memoryCache.Set(name, ret);
+            return ret;
+        }
         [HttpPost]
         public async Task<FindBetweenResult[]> Find([FromBody]FindBetween f)
         {
@@ -54,14 +65,14 @@ namespace Ant.Controllers
                 }
                 };
 
-            string name = f.FromDate + nameof(Find) + f.ToDate + "_"+f.term;
+            //string name = f.FromDate + nameof(Find) + f.ToDate + "_"+f.term;
     
-            if (memoryCache.TryGetValue(name, out FindBetweenResult[] ret))
-            {
-                return ret;
-            }
-            ret = await p.Find(f);
-            memoryCache.Set(name, ret);
+            //if (memoryCache.TryGetValue(name, out FindBetweenResult[] ret))
+            //{
+            //    return ret;
+            //}
+            var ret = await p.Find(f);
+            //memoryCache.Set(name, ret);
             return ret;
         }
     }

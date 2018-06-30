@@ -8,9 +8,10 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule, MatAccordion, MatExpansionModule, MatAutocompleteModule, MatBadgeModule, MatBottomSheetModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatGridListModule, MatInputModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSliderModule, MatTooltipModule, MatTabsModule, MatTableModule, MatStepperModule, MatSortModule, MatSnackBarModule, MatSlideToggleModule, MatTreeModule } from '@angular/material';
 import { TitleComponent } from './title/title.component';
 import { PeriodSearcherComponent } from './period-searcher/period-searcher.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PeriodService } from './services/period.service';
+import { CountriesSearcherComponent } from './countries-searcher/countries-searcher.component';
 
 @NgModule({
   declarations: [
@@ -18,12 +19,13 @@ import { PeriodService } from './services/period.service';
     MyNavComponent,
     TitleComponent,
     PeriodSearcherComponent,
+    CountriesSearcherComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
-    
+    ReactiveFormsModule,
     FormsModule,
      HttpClientModule,
      MatAutocompleteModule,
