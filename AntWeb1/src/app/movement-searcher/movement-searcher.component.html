@@ -5,7 +5,7 @@
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           
           <span    matBadgePosition="above before" matBadge="{{option.numberMovements}}" matBadgeOverlap="false">
-          {{ option.name }} {{option.canBeSelected}} 
+          {{ option.name }} 
                     <span [style.color]="option.canBeSelected? 'blue':'red'">{{option.fromDate}} - {{option.toDate}} </span> </span>
         </mat-option>
       </mat-autocomplete>
