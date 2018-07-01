@@ -42,6 +42,7 @@ namespace Ant
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseStaticFiles();
+            app.UseDefaultFiles();
             app.UseCors(it =>
             it.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             if (env.IsDevelopment())
