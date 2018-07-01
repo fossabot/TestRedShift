@@ -1,18 +1,16 @@
-import { Component, OnInit,EventEmitter, Output } from '@angular/core';
-import { ninvoke } from 'q';
-import { PeriodService } from '../services/period.service';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FindBetween } from '../classes/interval';
-
+import { PeriodService } from '../services/period.service';
 
 declare const noUiSlider : any;
 declare const wNumb: any;
 
 @Component({
-  selector: 'app-period-searcher',
-  templateUrl: './period-searcher.component.html',
-  styleUrls: ['./period-searcher.component.scss']
+  selector: 'app-publish-searcher',
+  templateUrl: './publish-searcher.component.html',
+  styleUrls: ['./publish-searcher.component.css']
 })
-export class PeriodSearcherComponent implements OnInit {
+export class PublishSearcherComponent implements OnInit {
 
   @Output() searchTime= new EventEmitter<FindBetween>();
 
@@ -35,13 +33,13 @@ export class PeriodSearcherComponent implements OnInit {
       
       'max': [ maxValue ]
     };
-    var slider = document.getElementById('slider');
-    var min = (<HTMLInputElement> document.getElementById('PeriodMin'));
-    var max = (<HTMLInputElement>  document.getElementById('PeriodMax'));
+    var slider = document.getElementById('sliderPublish');
+    var min = (<HTMLInputElement> document.getElementById('publishMin'));
+    var max = (<HTMLInputElement>  document.getElementById('publishMax'));
     min.value = minValue.toString(10);
     max.value = maxValue.toString(10);
     
-noUiSlider.create(slider, {
+    noUiSlider.create(slider, {
   start: [minValue,maxValue],
 	range: range_all_sliders,
 	
@@ -79,7 +77,7 @@ noUiSlider.create(slider, {
 	}
 });
 var self=this;
-var sl:any;
+var sl: any;
 sl=slider;
 sl.noUiSlider.on('end', function( values, handle ) {
 
@@ -96,11 +94,12 @@ sl.noUiSlider.on('end', function( values, handle ) {
   }
   ngOnInit() {
     
-    this.ps.getData().subscribe(interval=>{
+    // this.ps.getData().subscribe(interval=>{
       
-      this.initSlide(interval.start,interval.end);
-    })
+    //   this.initSlide(interval.start,interval.end);
+    // })
 
+    this.initSlide(1455, new Date().getFullYear());
    
   }
   findData(min: number, max: number){
@@ -111,5 +110,4 @@ sl.noUiSlider.on('end', function( values, handle ) {
       
     
   }
-
 }

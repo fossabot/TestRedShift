@@ -44,14 +44,25 @@ namespace Ant.Controllers
             memoryCache.Set(name, ret);
             return ret;
         }
-        public async ValueTask<GenericData[]> Countries()
+        public async ValueTask<Country[]> Countries()
         {
             string name = nameof(Countries) ;
-            if (memoryCache.TryGetValue(name, out GenericData[] ret))
+            if (memoryCache.TryGetValue(name, out Country[] ret))
             {
                 return ret;
             }
             ret = await p.FindCountries();
+            memoryCache.Set(name, ret);
+            return ret;
+        }
+        public async ValueTask<Movement[]> Movements()
+        {
+            string name = nameof(Movements);
+            if (memoryCache.TryGetValue(name, out Movement[] ret))
+            {
+                return ret;
+            }
+            ret = await p.FindMovement();
             memoryCache.Set(name, ret);
             return ret;
         }

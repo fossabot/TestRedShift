@@ -12,6 +12,19 @@ export class GenericData{
     public id:number;
     public name:string;
 }
+export class Movement extends GenericData{
+
+    constructor() {
+
+        super();
+        this.id = -1;
+    }
+    public numberMovements:number ;
+    public fromDate:number ;
+    public toDate:number ;
+
+        
+}
 export class Country extends GenericData{
 
     constructor() {
@@ -20,6 +33,9 @@ export class Country extends GenericData{
         this.id = -1;
     }
     public numberAuthors:number ;
+    public fromDate:number ;
+    public toDate:number ;
+
         
 }
 export class FindBetweenResult {

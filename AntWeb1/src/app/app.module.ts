@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PeriodService } from './services/period.service';
 import { CountriesSearcherComponent } from './countries-searcher/countries-searcher.component';
+import { PublishSearcherComponent } from './publish-searcher/publish-searcher.component';
+import { MovementSearcherComponent } from './movement-searcher/movement-searcher.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { CountriesSearcherComponent } from './countries-searcher/countries-searc
     TitleComponent,
     PeriodSearcherComponent,
     CountriesSearcherComponent,
+    PublishSearcherComponent,
+    MovementSearcherComponent,
   ],
   imports: [
     BrowserModule,

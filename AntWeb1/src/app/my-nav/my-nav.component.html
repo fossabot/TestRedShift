@@ -9,6 +9,10 @@
     <app-period-searcher (searchTime)="onSearchTime($event)"></app-period-searcher>
     <br /><br /><br />
     <app-countries-searcher (countrySelected) = "onCountrySelected($event)"></app-countries-searcher>
+    <br /><br /><br />
+    <app-movement-searcher  ></app-movement-searcher>
+    <app-publish-searcher></app-publish-searcher>
+    
     <mat-nav-list>
       <a mat-list-item href="#">Link 1</a>
       <a mat-list-item href="#">Link 2</a>
@@ -20,7 +24,7 @@
       <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Application Title</span>
+      <span>ANOCAD</span>
 
     </mat-toolbar>
     <mat-accordion multi="true">

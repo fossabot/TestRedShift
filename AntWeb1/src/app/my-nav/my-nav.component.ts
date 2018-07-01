@@ -83,18 +83,18 @@ export class MyNavComponent {
             var once  = Math.min(10,max);
             this.found.push(...it.slice(0,once));
             return;
-            interval(1000)
-            .pipe(
-              //timeInterval(),
-              takeWhile(page=> this.doAdd && pagesCount>page ),
+            // interval(1000)
+            // .pipe(
+            //   //timeInterval(),
+            //   takeWhile(page=> this.doAdd && pagesCount>page ),
               
-            ).
-            subscribe(nr=>{
+            // ).
+            // subscribe(nr=>{
               
-              console.log("slice" + JSON.stringify(nr));
-              const maxEl = Math.min((nr+1)*10,max-1);
-              this.found.push(...it.slice((nr)*10,maxEl));
-            })
+            //   console.log("slice" + JSON.stringify(nr));
+            //   const maxEl = Math.min((nr+1)*10,max-1);
+            //   this.found.push(...it.slice((nr)*10,maxEl));
+            // })
               
             
             

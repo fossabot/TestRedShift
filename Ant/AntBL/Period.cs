@@ -31,9 +31,13 @@ namespace AntBL
 
         }
 
-        public async Task<GenericData[]> FindCountries()
+        public async Task<Country[]> FindCountries()
         {
             return await t.FindCountries();
+        }
+        public async Task<Movement[]> FindMovement()
+        {
+            return await t.FindMovements();
         }
     }
 }

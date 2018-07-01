@@ -1,0 +1,11 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Pick Movement" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="itemSelected($event.option.value)">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          
+          <span    matBadgePosition="above before" matBadge="{{option.numberMovements}}" matBadgeOverlap="false">{{ option.name }} {{option.fromDate}} - {{option.toDate}} </span>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>

@@ -45,6 +45,15 @@ namespace AntDAL.Models
     public class Country:GenericData
     {
         public int NumberAuthors { get; set; }
+        public int FromDate { get; set; }
+        public int ToDate { get; set; }
+    }
+
+    public class Movement : GenericData
+    {
+        public int NumberMovements{ get; set; }
+        public int FromDate { get; set; }
+        public int ToDate { get; set; }
     }
     public class GenericData
     {
@@ -56,6 +65,8 @@ namespace AntDAL.Models
     {
         public virtual DbSet<FindBetweenResult> FindBetweenResult { get; set; }
         public virtual DbSet<Country> Country { get; set; }
+        public virtual DbSet<Movement> Movement { get; set; }
+        
         public async Task<FindBetweenResult[]> Find(FindBetween f)
         {
              
@@ -65,11 +76,18 @@ namespace AntDAL.Models
 
         }
 
-        public async Task<Country[]> FindCountries()
+        public async ValueTask<Country[]> FindCountries()
         {
             var data = await this.Country.FromSql($"exec GetCountries").ToArrayAsync();
             return data;
 
         }
+        public async ValueTask<Movement[]> FindMovements()
+        {
+            var data = await this.Movement.FromSql($"exec GetMovements").ToArrayAsync();
+            return data;
+
+        }
+        
     }
 }
