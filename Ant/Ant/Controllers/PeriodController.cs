@@ -46,7 +46,7 @@ namespace Ant.Controllers
         }
         public async ValueTask<Country[]> Countries()
         {
-            Console.WriteLine("start countries");
+            Console.WriteLine("start countries + " + Environment.GetEnvironmentVariable("cloudUser") + " --");
             string name = nameof(Countries) ;
             if (memoryCache.TryGetValue(name, out Country[] ret))
             {
