@@ -28,7 +28,7 @@ namespace AntDAL.Models
             if (!optionsBuilder.IsConfigured)
             {
     
-                optionsBuilder.UseSqlServer(this.ConnectionSqlServer());
+                optionsBuilder.UseSqlServer(ConnectionSqlServer());
             }
         }
 

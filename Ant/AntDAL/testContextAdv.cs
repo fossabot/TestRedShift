@@ -81,11 +81,13 @@ namespace AntDAL.Models
         }
 
 
-        public string ConnectionSqlServer()
+        public static string ConnectionSqlServer()
         {
             var cn = "";
             var sql = new SqlConnectionStringBuilder();
+
             string user = Environment.GetEnvironmentVariable("cloudUser");
+            Console.WriteLine("start in ConnectioSqlServer " + Environment.GetEnvironmentVariable("cloudUser") + " --");
             if (!string.IsNullOrWhiteSpace(user))
             {
 
@@ -103,6 +105,7 @@ namespace AntDAL.Models
             {
                 cn = "Server=.;Database=test;Trusted_Connection=True;";
             }
+            Console.WriteLine("connection is" + cn);
             return cn;
         }
 

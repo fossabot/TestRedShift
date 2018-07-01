@@ -30,10 +30,10 @@ namespace Ant
             
             services.AddCors();
             services.AddMvc();
-            
 
 
-            var connection = @"Server=.;Database=test;Trusted_Connection=True;";
+
+            var connection = testContext.ConnectionSqlServer();
             services.AddDbContext<testContext>(options => options.UseSqlServer(connection));
             services.AddScoped<Period>();
         }
