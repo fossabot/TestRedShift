@@ -11,6 +11,7 @@ export class Interval<T> {
 export class GenericData{
     public id:number;
     public name:string;
+    public canBeSelected=true;
 }
 export class Movement extends GenericData{
 

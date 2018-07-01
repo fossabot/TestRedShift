@@ -4,6 +4,8 @@ import { Observable, of, interval } from 'rxjs';
 import { map, finalize, delay, timeInterval, take, takeWhile, count } from 'rxjs/operators';
 import { FindBetween, FindBetweenResult, Country, Movement } from '../classes/interval';
 import { PeriodService } from '../services/period.service';
+import { MovementSearcherComponent } from '../movement-searcher/movement-searcher.component';
+
 
 @Component({
   selector: 'my-nav',
@@ -19,6 +21,7 @@ export class MyNavComponent {
   public searchBetween: FindBetween;
   public searchCountry: Country;
   public searchMovement : Movement;
+  public movementComponent: MovementSearcherComponent;
   public myalert(t: FindBetweenResult ){
     window.alert(t.id);
   }
@@ -41,6 +44,13 @@ export class MyNavComponent {
 
   }
   public onMovementSelected(m:Movement){
+    if(this.searchMovement != null)
+    {
+      if(JSON.stringify(this.searchMovement) == JSON.stringify(m)){
+          console.log('same movement');
+          return ;
+      }
+    }
     this.searchMovement  = m;
     this.search();
   }

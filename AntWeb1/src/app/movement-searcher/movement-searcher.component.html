@@ -4,7 +4,9 @@
       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="itemSelected($event.option.value)">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           
-          <span    matBadgePosition="above before" matBadge="{{option.numberMovements}}" matBadgeOverlap="false">{{ option.name }} {{option.fromDate}} - {{option.toDate}} </span>
+          <span    matBadgePosition="above before" matBadge="{{option.numberMovements}}" matBadgeOverlap="false">
+          {{ option.name }} {{option.canBeSelected}} 
+                    <span [style.color]="option.canBeSelected? 'blue':'red'">{{option.fromDate}} - {{option.toDate}} </span> </span>
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
