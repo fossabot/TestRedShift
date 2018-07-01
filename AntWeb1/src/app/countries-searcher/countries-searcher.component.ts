@@ -46,7 +46,7 @@ export class CountriesSearcherComponent implements OnInit {
     
   }
   public displayFn(c?: Country): string | undefined {
-    return c ? c.name : undefined;
+    return c ?  c.name + " "  + c.fromDate + " - " + c.toDate : undefined;
   }
   private _filter(value: string): Country[] {
     const filterValue = (value||'').toLowerCase();

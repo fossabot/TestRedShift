@@ -10,7 +10,7 @@
     <br /><br /><br />
     <app-countries-searcher (countrySelected) = "onCountrySelected($event)"></app-countries-searcher>
     <br /><br /><br />
-    <app-movement-searcher  ></app-movement-searcher>
+    <app-movement-searcher (itemSelectedEmit)="onMovementSelected($event)" ></app-movement-searcher>
     <app-publish-searcher></app-publish-searcher>
     
     <mat-nav-list>
@@ -54,13 +54,15 @@
     </mat-accordion>
 
     {{ message}} 
-    <div *ngFor="let t of found; let i= index">
+    <div *ngFor="let t of found; let i= index"  >
 
 
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>{{i+1}}) {{ t.name }} </mat-card-title>
+          <mat-card-title>
+            <span (click)="myalert(t)">{{i+1}}) {{ t.name }}  </span>
+              </mat-card-title>
           <mat-card-subtitle>
             
             <!-- {{t.fromDate}} - {{ t.toDate}}  -->

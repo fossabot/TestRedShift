@@ -9,6 +9,7 @@ namespace AntDAL.Models
     {
         public string term { get; set; }
         public int countryId { get; set; }
+        public int movementId { get; set; }
         public FindBetween()
         {
 
@@ -31,6 +32,8 @@ namespace AntDAL.Models
             if (!string.IsNullOrWhiteSpace(term))
                 return true;
             if (this.countryId > 0)
+                return true;
+            if (this.movementId > 0)
                 return true;
             return false;
         }
@@ -70,7 +73,7 @@ namespace AntDAL.Models
         public async Task<FindBetweenResult[]> Find(FindBetween f)
         {
              
-            var data= await this.FindBetweenResult.FromSql($"exec findBetweenDates {f.FromDate} ,{f.ToDate}, { f.term} , {f.countryId}" ).ToArrayAsync();
+            var data= await this.FindBetweenResult.FromSql($"exec findBetweenDates {f.FromDate} ,{f.ToDate}, { f.term} , {f.countryId}, {f.movementId}" ).ToArrayAsync();
             return data;
 
 

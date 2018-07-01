@@ -38,16 +38,18 @@ export class MovementSearcherComponent implements OnInit {
     )
   }
   public itemSelected(t:Movement){
+      
     if(t== null){
       this.itemSelectedEmit.emit(new Movement());
     }
     else{
+      
       this.itemSelectedEmit.emit(t);
     }
     
   }
   public displayFn(c?: Movement): string | undefined {
-    return c ? c.name : undefined;
+    return c ?  c.name + " "  + c.fromDate + " - " + c.toDate : undefined;
   }
   private _filter(value: string): Movement[] {
     const filterValue = (value||'').toLowerCase();

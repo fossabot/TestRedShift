@@ -50,6 +50,7 @@ export class FindBetween{
         // this.fromDate = parseInt(fromDate.toString(10),10);
         // this.toDate = 
     }
+    public movementId: number;
     public countryId:number;
     public  term: string;
     public get fromDate(): number  {

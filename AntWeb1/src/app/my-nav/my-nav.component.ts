@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable, of, interval } from 'rxjs';
 import { map, finalize, delay, timeInterval, take, takeWhile, count } from 'rxjs/operators';
-import { FindBetween, FindBetweenResult, Country } from '../classes/interval';
+import { FindBetween, FindBetweenResult, Country, Movement } from '../classes/interval';
 import { PeriodService } from '../services/period.service';
 
 @Component({
@@ -18,18 +18,31 @@ export class MyNavComponent {
   public searchTitle: string;
   public searchBetween: FindBetween;
   public searchCountry: Country;
-
+  public searchMovement : Movement;
+  public myalert(t: FindBetweenResult ){
+    window.alert(t.id);
+  }
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
     
-  constructor(private breakpointObserver: BreakpointObserver, private ps: PeriodService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private ps: PeriodService) {
+    this.searchCountry = new Country();
+    this.searchMovement= new Movement();
+
+
+  }
   public onCountrySelected(country:Country){
     
     this.searchCountry= country;
+    
     this.search();
 
+  }
+  public onMovementSelected(m:Movement){
+    this.searchMovement  = m;
+    this.search();
   }
   public onSearchTitle(term:string){
     console.log(" in search title" + term);
@@ -56,6 +69,12 @@ export class MyNavComponent {
       }
       search.countryId=this.searchCountry.id || -1;
       
+
+      if(this.searchMovement.id > 0){
+        mess += ' in movement ' + this.searchMovement.name;
+      }
+      search.movementId=this.searchMovement.id || -1;
+
       this.searchTitle = this.searchTitle ||'';
       if(this.searchTitle.length > 0){
         mess += ' title : ' +this.searchTitle;
@@ -76,11 +95,11 @@ export class MyNavComponent {
             it.sort((a,b)=>a.name.localeCompare(b.name));
             var nr:0, max:number;
             max=it.length;
-            var pagesCount=max / 20;
+            var pagesCount=max / 50;
             this.found=[];
             if(max == 0 )
               return;
-            var once  = Math.min(10,max);
+            var once  = Math.min(50,max);
             this.found.push(...it.slice(0,once));
             return;
             // interval(1000)
