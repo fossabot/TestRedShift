@@ -74,7 +74,11 @@ export class MovementSearcherComponent implements OnInit {
 
       this.itemSelectedEmit.emit(t);
     }
-
+    var c=new ChangeYears();
+    c.from='MovementSearcherComponent';
+    c.dateFrom =t.fromDate;
+    c.dateTo = t.toDate;
+    this.notifyChanged.AnnouncechangeYears(c);
   }
   public displayFn(c?: Movement): string | undefined {
     return c ? c.name + " " + c.fromDate + " - " + c.toDate : undefined;

@@ -2,6 +2,7 @@ import { Component, OnInit,EventEmitter, Output } from '@angular/core';
 import { ninvoke } from 'q';
 import { PeriodService } from '../services/period.service';
 import { FindBetween } from '../classes/interval';
+import { ChangeYears, ChangedDatesService } from '../services/changed-dates.service';
 
 
 declare const noUiSlider : any;
@@ -17,7 +18,20 @@ export class PeriodSearcherComponent implements OnInit {
   @Output() searchTime= new EventEmitter<FindBetween>();
 
   numberShowOnSlide:number=0;
-  constructor(private ps: PeriodService ) { }
+  sl: any;
+  constructor(private ps: PeriodService,private notifyChanged: ChangedDatesService ) {
+
+    notifyChanged.changedYears$.subscribe(it=>{
+      console.log("received in PeriodSearcherComponent " )
+      if(this.sl == null)
+        return;
+      if (it.from != 'PeriodSearcherComponent') {
+        this.sl.noUiSlider.set([it.dateFrom,it.dateTo]);
+        // this.min.value = parseInt(it.dateFrom.toString(), 10).toString(10);
+        // this.max.value = parseInt(it.dateTo.toString(), 10).toString(10);
+      }
+    });
+   }
 
   initSlide(minValue: number, maxValue:number){
     
@@ -79,9 +93,9 @@ noUiSlider.create(slider, {
 	}
 });
 var self=this;
-var sl:any;
-sl=slider;
-sl.noUiSlider.on('end', function( values, handle ) {
+
+this.sl=slider;
+this.sl.noUiSlider.on('end', function( values, handle ) {
 
 		if(handle){
         max.value=parseInt(values[1].toString(),10).toString(10);
@@ -91,6 +105,17 @@ sl.noUiSlider.on('end', function( values, handle ) {
     }
     self.findData(values[0],values[1]);
 	
+});
+this.sl.noUiSlider.on('update', function( values, handle ) {
+
+  if(handle){
+      max.value=parseInt(values[1].toString(),10).toString(10);
+  }
+  else{
+    min.value= parseInt(values[0].toString(),10).toString(10);
+  }
+  
+
 });
 
   }
@@ -103,13 +128,17 @@ sl.noUiSlider.on('end', function( values, handle ) {
 
    
   }
-  findData(min: number, max: number){
-      var f= new FindBetween();
-      f.fromDate = min;
-      f.toDate = max;
-      this.searchTime.emit(f);
-      
-    
+  findData(min: number, max: number) {
+    var f = new FindBetween();
+    f.fromDate = min;
+    f.toDate = max;
+    this.searchTime.emit(f);
+    var c= new ChangeYears();
+    c.dateFrom = min;
+    c.dateTo = max;
+    c.from = 'PeriodSearcherComponent';
+    this.notifyChanged.AnnouncechangeYears(c);
+
   }
 
 }

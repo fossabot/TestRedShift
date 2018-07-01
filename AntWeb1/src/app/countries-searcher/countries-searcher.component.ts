@@ -19,9 +19,22 @@ export class CountriesSearcherComponent implements OnInit {
   public filteredOptions:Observable<GenericData[]>;
   @Output() countrySelected = new EventEmitter<Country>();
   constructor(private ps : PeriodService, private notifyChanged: ChangedDatesService) { 
-    this.notifyChanged.changedYears$.subscribe(it=>{
-      if(it.from != this.constructor.name)
-        this.changeYears = it;
+    
+    this.notifyChanged.changedYears$.subscribe(res=>{
+      console.log('received at CountriesSearcherComponent ' +JSON.stringify(res));
+      
+      if(res.from != 'CountriesSearcherComponent')
+          this.changeYears = res;
+          this.countries.every(it=>it.canBeSelected = true);
+        if (this.changeYears != null && this.changeYears.dateFrom != null) {
+           this.countries.filter(it => this.changeYears.dateFrom > it.toDate).forEach(it =>{
+            console.log(it.fromDate);
+            it.canBeSelected=false;
+           });
+        }
+        if (this.changeYears != null && this.changeYears.dateTo != null) {
+          this.countries.filter(it => this.changeYears.dateTo < it.fromDate  ).forEach(it=>it.canBeSelected=false);
+        }
       }
     );
 
@@ -35,12 +48,13 @@ export class CountriesSearcherComponent implements OnInit {
       .subscribe(
       it=>{
         this.countries = it.sort((a,b)=>a.name.localeCompare(b.name));  
+        this.countries.forEach(it=>it.canBeSelected = true);
         this.filteredOptions = this.myControl.valueChanges
-    .pipe(
-      startWith<string | Country>(''),
-      map(value => typeof value === 'string' ? value : value.name),
-      map(name => name ? this._filter(name) : this.countries.slice()) 
-    );
+            .pipe(
+              startWith<string | Country>(''),
+              map(value => typeof value === 'string' ? value : value.name),
+              map(name => name ? this._filter(name) : this.countries.slice()) 
+            );
         //window.alert(it.length);
       }
     )
