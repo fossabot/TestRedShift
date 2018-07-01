@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace AntDAL.Models
@@ -77,6 +78,32 @@ namespace AntDAL.Models
             return data;
 
 
+        }
+
+
+        public string ConnectionSqlServer()
+        {
+            var cn = "";
+            var sql = new SqlConnectionStringBuilder();
+            string user = Environment.GetEnvironmentVariable("cloudUser");
+            if (!string.IsNullOrWhiteSpace(user))
+            {
+
+                sql.DataSource = "52.178.138.127";
+                sql.IntegratedSecurity = false;
+                sql.UserID = user;
+                sql.Password = Environment.GetEnvironmentVariable("cloudPwd");
+                sql.ConnectRetryCount = 5;
+                sql.ConnectRetryInterval = 10;
+                sql.InitialCatalog = "InfoRO";
+                sql.ConnectTimeout = 300;
+                cn = sql.ConnectionString;
+            }
+            else
+            {
+                cn = "Server=.;Database=test;Trusted_Connection=True;";
+            }
+            return cn;
         }
 
         public async ValueTask<Country[]> FindCountries()

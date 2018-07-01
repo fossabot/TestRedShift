@@ -46,6 +46,7 @@ namespace Ant.Controllers
         }
         public async ValueTask<Country[]> Countries()
         {
+            Console.WriteLine("start countries");
             string name = nameof(Countries) ;
             if (memoryCache.TryGetValue(name, out Country[] ret))
             {
