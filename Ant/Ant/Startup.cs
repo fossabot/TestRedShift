@@ -27,7 +27,7 @@ namespace Ant
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMemoryCache();
-
+            
             services.AddCors();
             services.AddMvc();
             
@@ -41,6 +41,7 @@ namespace Ant
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseStaticFiles();
             app.UseCors(it =>
             it.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             if (env.IsDevelopment())
