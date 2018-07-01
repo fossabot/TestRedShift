@@ -55,7 +55,7 @@ export class CountriesSearcherComponent implements OnInit {
     }
     this.countrySelected.emit(c);
     var cy=new ChangeYears();
-    cy.from = this.constructor.name;
+    cy.from = 'CountriesSearcherComponent';
     cy.dateFrom = c.fromDate;
     cy.dateTo = c.toDate;
     this.notifyChanged.AnnouncechangeYears(cy);

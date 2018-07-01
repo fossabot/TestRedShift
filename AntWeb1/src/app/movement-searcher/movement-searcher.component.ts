@@ -23,8 +23,8 @@ export class MovementSearcherComponent implements OnInit {
   constructor(private ps: PeriodService, private notifyChanged: ChangedDatesService) {
 
     this.notifyChanged.changedYears$.subscribe(it => {
-      console.log('received movement' + it.from);
-      if (it.from != this.constructor.name) {
+      console.log('received movement' + it.from + ' we are in ' + MovementSearcherComponent.name);
+      if (it.from != 'MovementSearcherComponent') {
 
         this.changeYears = it;
         console.log('movement' + this.movements.length + JSON.stringify(this.changeYears || {})) 
