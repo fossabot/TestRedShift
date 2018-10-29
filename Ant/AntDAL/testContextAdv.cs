@@ -91,15 +91,10 @@ namespace AntDAL.Models
             if (!string.IsNullOrWhiteSpace(user))
             {
 
-                sql.DataSource = "52.178.138.127";
-                sql.IntegratedSecurity = false;
-                sql.UserID = user;
-                sql.Password = Environment.GetEnvironmentVariable("cloudPwd");
-                sql.ConnectRetryCount = 5;
-                sql.ConnectRetryInterval = 10;
-                sql.InitialCatalog = "InfoRO";
-                sql.ConnectTimeout = 300;
-                cn = sql.ConnectionString;
+                var pwd = Environment.GetEnvironmentVariable("cloudPwd");
+                var server = Environment.GetEnvironmentVariable("cloudConnection");
+                return $"Server = {server}; Initial Catalog = InfoRO; Persist Security Info = False; User ID = {user}; Password ={pwd}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30; ";
+                
             }
             else
             {
