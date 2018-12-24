@@ -1,3 +1,14 @@
-<p>
-  adv-search works!asdasdasda
-</p>
+
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="Pick Topic" aria-label="Number" matInput [formControl]="topicSearch" [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFnTopic" (optionSelected)="topicSelected($event.option.value)">
+        <mat-option *ngFor="let option of topics | async" [value]="option">
+          <!-- <span matBadgePosition="above before" matBadge="{{option.numberAuthors}}" matBadgeOverlap="false">{{ option.name }} -->
+            <!-- <span [style.color]="option.canBeSelected? 'blue':'red'">{{option.fromDate}} - {{option.toDate}} </span> -->
+            {{ option.name }}
+          <!-- </span> -->
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>

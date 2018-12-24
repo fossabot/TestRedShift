@@ -67,6 +67,16 @@ namespace Ant.Controllers
             memoryCache.Set(name, ret);
             return ret;
         }
+        [HttpGet]
+        public async Task<Topic[]> FindTopics()
+        {
+            return await t.FindTopics();
+        }
+        [HttpGet("{id}")]
+        public async Task<FindBetweenResult[]> FindAdvanced(long id)
+        {
+            return await t.FindAdvanced(id);
+        }
         [HttpPost]
         public async Task<FindBetweenResult[]> Find([FromBody]FindBetween f)
         {

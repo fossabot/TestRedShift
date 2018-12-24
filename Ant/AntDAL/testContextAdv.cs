@@ -64,9 +64,15 @@ namespace AntDAL.Models
         public int Id { get; set; }
         public string Name { get; set; }
     }
+    public class Topic
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+    }
     
     public partial class testContext : DbContext
     {
+        public virtual DbSet<Topic> FindTopic { get; set; }
         public virtual DbSet<FindBetweenResult> FindBetweenResult { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Movement> Movement { get; set; }
@@ -80,7 +86,16 @@ namespace AntDAL.Models
 
         }
 
-
+        public async Task<FindBetweenResult[]> FindAdvanced(long idTopic)
+        {
+            var data = await this.FindBetweenResult.FromSql($"exec Search {idTopic} ").ToArrayAsync();
+            return data;
+        }
+        public async Task<Topic[]> FindTopics()
+        {
+            var data = await this.FindTopic.FromSql($"select ID, Name from HDTopic order by Name  ").ToArrayAsync();
+            return data;
+        }
         public static string ConnectionSqlServer()
         {
             var cn = "";

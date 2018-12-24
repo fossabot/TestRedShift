@@ -30,6 +30,18 @@ namespace AntBL
 
 
         }
+        public async Task<FindBetweenResult[]> FindAdvanced(long idTopic)
+        {
+
+
+            return await t.FindAdvanced(idTopic);
+
+
+        }
+        public async Task<Topic[]> FindTopics()
+        {
+            return await t.FindTopics();
+        }
 
         public async Task<Country[]> FindCountries()
         {
