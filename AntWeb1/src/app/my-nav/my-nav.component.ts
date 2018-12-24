@@ -29,7 +29,9 @@ export class MyNavComponent {
   }
   public message:string;
   public found: Array<FindBetweenResult>;
-  
+  public myalert(t: FindBetweenResult ){
+    window.alert(t.id);
+  }
 
 }
 
