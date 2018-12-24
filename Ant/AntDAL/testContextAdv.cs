@@ -98,7 +98,7 @@ namespace AntDAL.Models
             }
             else
             {
-                cn = "Server=.;Database=test;Trusted_Connection=True;";
+                cn = "Server=.;Database=InfoRo20181224;Trusted_Connection=True;";
             }
             Console.WriteLine("connection is" + cn);
             return cn;

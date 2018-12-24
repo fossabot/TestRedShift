@@ -14,6 +14,9 @@ import { PeriodService } from './services/period.service';
 import { CountriesSearcherComponent } from './countries-searcher/countries-searcher.component';
 import { PublishSearcherComponent } from './publish-searcher/publish-searcher.component';
 import { MovementSearcherComponent } from './movement-searcher/movement-searcher.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AdvSearchComponent } from './adv-search/adv-search.component';
+import { OldSearchComponent } from './old-search/old-search.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,8 @@ import { MovementSearcherComponent } from './movement-searcher/movement-searcher
     CountriesSearcherComponent,
     PublishSearcherComponent,
     MovementSearcherComponent,
+    AdvSearchComponent,
+    OldSearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +72,7 @@ import { MovementSearcherComponent } from './movement-searcher/movement-searcher
      MatToolbarModule,
      MatTooltipModule,
      MatTreeModule,
+     AppRoutingModule,
      
   ],
   providers: [PeriodService],

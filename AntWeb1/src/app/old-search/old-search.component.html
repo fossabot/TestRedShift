@@ -1,0 +1,15 @@
+
+<app-title (searchString)="onSearchTitle($event)"  ></app-title>
+    
+    <app-period-searcher (searchTime)="onSearchTime($event)"></app-period-searcher>
+    <br /><br /><br />
+    <app-countries-searcher (countrySelected) = "onCountrySelected($event)"></app-countries-searcher>
+    <br /><br /><br />
+    <app-movement-searcher (itemSelectedEmit)="onMovementSelected($event)" ></app-movement-searcher>
+    <app-publish-searcher></app-publish-searcher>
+    
+    <mat-nav-list>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list>

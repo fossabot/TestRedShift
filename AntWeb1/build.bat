@@ -1,7 +1,7 @@
-call ng build --prod --build-optimizer
+rem call ng build --prod --build-optimizer
 
 
-copy dist\*.* ..\Ant\dist\  /MIR /XD
+robocopy dist\AntWeb1\ ..\Ant\Ant\wwwroot\  /MIR /XD
 
 
 
