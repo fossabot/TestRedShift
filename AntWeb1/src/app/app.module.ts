@@ -17,6 +17,7 @@ import { MovementSearcherComponent } from './movement-searcher/movement-searcher
 import { AppRoutingModule } from './app-routing.module';
 import { AdvSearchComponent } from './adv-search/adv-search.component';
 import { OldSearchComponent } from './old-search/old-search.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -73,8 +74,10 @@ import { OldSearchComponent } from './old-search/old-search.component';
      MatTooltipModule,
      MatTreeModule,
      AppRoutingModule,
+     ScrollingModule
      
   ],
+  exports:[ScrollingModule],
   providers: [PeriodService],
   bootstrap: [AppComponent]
 })

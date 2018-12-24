@@ -361,6 +361,8 @@ MIT
 
 @angular/material/expansion
 
+@angular/cdk/scrolling
+
 zone.js
 MIT
 The MIT License

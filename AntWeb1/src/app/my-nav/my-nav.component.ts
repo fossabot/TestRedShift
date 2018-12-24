@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable, of, interval } from 'rxjs';
 import { map, finalize, delay, timeInterval, take, takeWhile, count } from 'rxjs/operators';
@@ -12,7 +12,8 @@ import { FoundResultsService } from '../found-results.service';
   // tslint:disable-next-line:component-selector
   selector: 'my-nav',
   templateUrl: './my-nav.component.html',
-  styleUrls: ['./my-nav.component.css']
+  styleUrls: ['./my-nav.component.css'],
+ // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MyNavComponent {
 

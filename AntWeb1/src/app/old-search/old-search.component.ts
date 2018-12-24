@@ -105,12 +105,13 @@ export class OldSearchComponent implements OnInit {
           it.sort((a,b)=>a.name.localeCompare(b.name));
           var nr:0, max:number;
           max=it.length;
-          var pagesCount=max / 50;
+          //var pagesCount=max / 50;
           this.found=[];
           if(max == 0 )
             return;
-          var once  = Math.min(50,max);
-          this.found.push(...it.slice(0,once));
+          //var once  = Math.min(50,max);
+          //this.found.push(...it.slice(0,once));
+          this.found=it;
           this.fs.NextRest(this.found);
           return;
           // interval(1000)

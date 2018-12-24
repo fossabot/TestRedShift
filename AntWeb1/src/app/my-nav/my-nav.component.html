@@ -6,6 +6,8 @@
 
     <br />
     <a routerLink="/advSearch">Advanced Search</a>
+    <br />
+    
     <router-outlet></router-outlet>
     
     
@@ -44,37 +46,38 @@
       </mat-expansion-panel>
     </mat-accordion>
 
-    {{ message}} 
-    <div *ngFor="let t of found; let i= index"  >
+    {{ message}}  {{found?.length}}
+    <cdk-virtual-scroll-viewport itemSize="2" class="example-viewport">
+      <div *cdkVirtualFor="let t of found; let i= index" class="example-item">
+       
+          <mat-card class="example-card">
+              <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>
+                  <span (click)="myalert(t)">{{i+1}}) {{ t.name }}  </span>
+                    </mat-card-title>
+                <mat-card-subtitle>
+                  
+                  <!-- {{t.fromDate}} - {{ t.toDate}}  -->
+                </mat-card-subtitle>
+              </mat-card-header>
+              <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+              <mat-card-content>
+                <!-- <p>
+                  Description of book, author and so on
+                  <br/> -->
+                  <!-- Internal id {{t.id}} -->
+                <!-- </p> -->
+              </mat-card-content>
+              <mat-card-actions>
+                <!-- <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button> -->
+              </mat-card-actions>
+            </mat-card>
+      </div>
+    </cdk-virtual-scroll-viewport>
 
 
-      <mat-card class="example-card">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>
-            <span (click)="myalert(t)">{{i+1}}) {{ t.name }}  </span>
-              </mat-card-title>
-          <mat-card-subtitle>
-            
-            <!-- {{t.fromDate}} - {{ t.toDate}}  -->
-          </mat-card-subtitle>
-        </mat-card-header>
-        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-        <mat-card-content>
-          <!-- <p>
-            Description of book, author and so on
-            <br/> -->
-            <!-- Internal id {{t.id}} -->
-          <!-- </p> -->
-        </mat-card-content>
-        <mat-card-actions>
-          <!-- <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button> -->
-        </mat-card-actions>
-      </mat-card>
-
-
-
-    </div>
+    
   </mat-sidenav-content>
 </mat-sidenav-container>
