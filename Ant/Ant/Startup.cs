@@ -61,8 +61,10 @@ namespace Ant
                 {
                     Position = 0
                 };
+                //ms.CopyTo(context.Response.Body);
                 await ms.CopyToAsync(context.Response.Body);
-                context.Response.StatusCode = StatusCodes.Status200OK;
+                //context.Response.StatusCode = StatusCodes.Status200OK;
+                return ;
             });
         }
     }
