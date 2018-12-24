@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Topic } from '../topic';
 import { FoundResultsService } from '../found-results.service';
 import { FormControl } from '@angular/forms';
+import { FindBetweenResult } from '../classes/interval';
 
 @Component({
   selector: 'app-adv-search',
@@ -23,7 +24,12 @@ export class AdvSearchComponent implements OnInit {
     return c ?  c.name : undefined;
   }
   public topicSelected(t?:Topic){
-    this.fs.NextRest([]);
+    var fArr=[];
+    var f=new FindBetweenResult();
+    f.id=0;
+    f.name="Loading data ... please wait";
+    fArr.push(f);
+    this.fs.NextRest(fArr);
     this.adv.FindAdvanced(t.id).subscribe(it=>{
       this.fs.NextRest(it);
     });
