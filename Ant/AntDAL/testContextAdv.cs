@@ -68,6 +68,7 @@ namespace AntDAL.Models
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        public long HdNumber { get; set; }
     }
     
     public partial class testContext : DbContext
@@ -93,7 +94,7 @@ namespace AntDAL.Models
         }
         public async Task<Topic[]> FindTopics()
         {
-            var data = await this.FindTopic.FromSql($"select ID, Name from HDTopic order by Name  ").ToArrayAsync();
+            var data = await this.FindTopic.FromSql($"select ID, Name, Count as HdNumber from HDTopic order by Name  ").ToArrayAsync();
             return data;
         }
         public static string ConnectionSqlServer()

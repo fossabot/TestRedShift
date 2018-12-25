@@ -13,12 +13,14 @@ import { FindBetweenResult } from '../classes/interval';
 })
 export class AdvSearchComponent implements OnInit {
 
-  topics:Observable<Topic[]>;
+  topics:Topic[];
   public topicSearch = new FormControl();
   constructor(private adv: AdvfindService, private fs: FoundResultsService) { }
 
   ngOnInit() {
-    this.topics = this.adv.getTopics();
+    this.adv.getTopics().subscribe(it=>{
+      this.topics = it;    
+    });
   }
   public displayFnTopic(c?: Topic): string | undefined {
     return c ?  c.name : undefined;
