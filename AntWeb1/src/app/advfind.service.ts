@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Topic } from './topic';
 import { environment } from 'src/environments/environment';
 import { FindBetweenResult } from './classes/interval';
+import { Specialization } from './Specialization';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,10 @@ export class AdvfindService {
     const url = environment.urlApi +  this.periodApi + 'FindAdvanced/'+ id;
     
     return this.http.get<FindBetweenResult[]>(url);
+  }
+  public getSpecializations():Observable<Specialization[]>{
+    const url = environment.urlApi +  this.periodApi + 'findspecializations';
+    
+    return this.http.get<Specialization[]>(url);
   }
 }

@@ -70,9 +70,18 @@ namespace AntDAL.Models
         public string Name { get; set; }
         public long HdNumber { get; set; }
     }
-    
+    public class Specialization
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+        public long HdNumber { get; set; }
+        public long? IDParent { get; set; }
+    }
+
     public partial class testContext : DbContext
     {
+        public virtual DbSet<Specialization> FindSpecialization { get; set; }
+
         public virtual DbSet<Topic> FindTopic { get; set; }
         public virtual DbSet<FindBetweenResult> FindBetweenResult { get; set; }
         public virtual DbSet<Country> Country { get; set; }
@@ -86,7 +95,11 @@ namespace AntDAL.Models
 
 
         }
-
+        public async Task<Specialization[]> FindSpecializations()
+        {
+            var data = await this.FindSpecialization.FromSql($"select ID, Name, Count as HdNumber, IDParent from [HDSpecialization] order by IDParent ").ToArrayAsync();
+            return data;
+        }
         public async Task<FindBetweenResult[]> FindAdvanced(long idTopic)
         {
             var data = await this.FindBetweenResult.FromSql($"exec Search {idTopic} ").ToArrayAsync();

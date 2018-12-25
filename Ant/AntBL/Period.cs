@@ -42,7 +42,10 @@ namespace AntBL
         {
             return await t.FindTopics();
         }
-
+        public async Task<Specialization[]> FindSpecializations()
+        {
+            return await t.FindSpecializations();
+        }
         public async Task<Country[]> FindCountries()
         {
             return await t.FindCountries();
