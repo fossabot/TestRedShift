@@ -24,10 +24,20 @@ export class TodoItemNode {
     var t= new TodoItemNode();
     t.item =s.name;
     t.id= s.id;
+    t.children=new Array<TodoItemNode>();
     return t;
   }
 }
 export class TodoItemArray extends Array<TodoItemNode>{
+
+  //https://blog.simontest.net/extend-array-with-typescript-965cc1134b3
+  private constructor(items?: Array<TodoItemNode>) {
+
+    super(...items);
+  }
+  static create(): TodoItemArray {
+    return Object.create(TodoItemArray.prototype);
+  }
   public FindParent(id:number): TodoItemNode  {
       for (let index = 0; index < this.length; index++) {
         const element = this[index];
@@ -39,6 +49,8 @@ export class TodoItemArray extends Array<TodoItemNode>{
       return null;
   }
   private findRec(t:TodoItemNode,id:number):TodoItemNode{
+    if(t == null)
+      return null;
     if(t.id == id)
       return t;
     const lengthChilder=t.children.length;
@@ -78,18 +90,21 @@ export class ChecklistDatabase {
     //     file node as children.
     this.adv.getSpecializations().subscribe(it=>{
       var newArr = it.slice();
-      const data=new TodoItemArray();
+      console.log(`number received : ${newArr.length}`);
+      const data= TodoItemArray.create();
+     
       it.forEach((spec)=>{
-        if(spec.iDParent == null){
+        if(spec.idParent == null){
           data.push(TodoItemNode.FromSpec(spec));
           const index = newArr.indexOf(spec, 0);
           newArr.splice(index,1);
         }
       })
+      console.log(`after removing null : ${newArr.length}`);
       while(newArr.length>0){
         console.log(`number elements : ${newArr.length}`);
         it.forEach((spec)=>{
-          var item = data.FindParent(spec.iDParent);
+          var item = data.FindParent(spec.idParent);
 
           if(item!= null){
             item.children.push(TodoItemNode.FromSpec(spec));  
