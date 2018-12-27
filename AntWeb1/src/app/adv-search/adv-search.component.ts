@@ -193,7 +193,7 @@ export class AdvSearchComponent implements OnInit {
             : new TodoItemFlatNode();
         flatNode.item = node.item;
         flatNode.level = level;
-        flatNode.expandable = !!node.children;
+        flatNode.expandable = (node.children.length>0);
         this.flatNodeMap.set(flatNode, node);
         this.nestedNodeMap.set(node, flatNode);
         return flatNode;
@@ -202,6 +202,8 @@ export class AdvSearchComponent implements OnInit {
       /** Whether all the descendants of the node are selected. */
       descendantsAllSelected(node: TodoItemFlatNode): boolean {
         const descendants = this.treeControl.getDescendants(node);
+        if(descendants.length == 0)
+          return false;
         const descAllSelected = descendants.every(child =>
           this.checklistSelection.isSelected(child)
         );

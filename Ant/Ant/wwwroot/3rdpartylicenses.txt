@@ -345,13 +345,17 @@ MIT
 
 @angular/material/core
 
+@angular/material/checkbox
+
+@angular/material/icon
+
 @angular/material/form-field
 
 @angular/material/autocomplete
 
-@angular/material/list
+@angular/material/tree
 
-@angular/material/icon
+@angular/material/list
 
 @angular/material/card
 
