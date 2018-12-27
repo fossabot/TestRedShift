@@ -19,14 +19,15 @@ export class AdvfindService {
     return this.http.get<Topic[]>(url);
   }
 
-  public FindAdvanced(id:number) : Observable<FindBetweenResult[]> {
-    const url = environment.urlApi +  this.periodApi + 'FindAdvanced/'+ id;
-    
+  public FindAdvanced(idTopic:number, idSpec : number) : Observable<FindBetweenResult[]> {
+    idTopic= idTopic || 0;
+    idSpec =idSpec || 0;
+    const url = environment.urlApi +  this.periodApi + 'FindAdvanced/'+ idTopic +'/'+idSpec;
     return this.http.get<FindBetweenResult[]>(url);
   }
   public getSpecializations():Observable<Specialization[]>{
     const url = environment.urlApi +  this.periodApi + 'findspecializations';
     
     return this.http.get<Specialization[]>(url);
-  }
+  } 
 }

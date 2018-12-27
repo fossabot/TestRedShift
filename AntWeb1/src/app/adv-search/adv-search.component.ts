@@ -240,8 +240,11 @@ export class AdvSearchComponent implements OnInit {
     
       /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
       todoLeafItemSelectionToggle(node: TodoItemFlatNode): void {
+        this.selectedSpec=node.id;
+        this.searchAdv();
         this.checklistSelection.toggle(node);
         this.checkAllParentsSelection(node);
+        
       }
     
       /* Checks all the parents when a leaf node is selected/unselected */
@@ -289,6 +292,8 @@ export class AdvSearchComponent implements OnInit {
     
 
   ngOnInit() {
+    this.selectedSpec=0;
+    this.selectedTopic=0;
     this.adv.getTopics().subscribe(it=>{
       this.topics = it;    
     });
@@ -296,16 +301,23 @@ export class AdvSearchComponent implements OnInit {
   public displayFnTopic(c?: Topic): string | undefined {
     return c ?  c.name : undefined;
   }
-  public topicSelected(t?:Topic){
+  public searchAdv(){
+    //window.alert('search');
     var fArr=[];
     var f=new FindBetweenResult();
     f.id=0;
     f.name="Loading data ... please wait";
     fArr.push(f);
     this.fs.NextRest(fArr);
-    this.adv.FindAdvanced(t.id).subscribe(it=>{
+    this.adv.FindAdvanced(this.selectedTopic,this.selectedSpec).subscribe(it=>{
       this.fs.NextRest(it);
     });
-    //this.fs.NextRest
+  }
+  private selectedTopic: number;
+  private selectedSpec: number;
+  public topicSelected(t?:Topic){
+    this.selectedTopic = t.id;
+    //window.alert('search');
+    this.searchAdv();
   }
 }
