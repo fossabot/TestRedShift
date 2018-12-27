@@ -19,12 +19,14 @@ import { findReadVarNames } from '@angular/compiler/src/output/output_ast';
 export class TodoItemNode {
   children: TodoItemNode[];
   item: string;
+  hdNumber: number;
   id:number;
   static FromSpec(s:Specialization):TodoItemNode{
     var t= new TodoItemNode();
     t.item =s.name;
     t.id= s.id;
     t.children=new Array<TodoItemNode>();
+    t.hdNumber= s.hdNumber;
     return t;
   }
 }
@@ -66,9 +68,11 @@ export class TodoItemArray extends Array<TodoItemNode>{
 }
 /** Flat to-do item node with expandable and level information */
 export class TodoItemFlatNode {
+  id:number;
   item: string;
   level: number;
   expandable: boolean;
+  hdNumber:number;
 }
 
 /**
@@ -192,8 +196,10 @@ export class AdvSearchComponent implements OnInit {
             ? existingNode
             : new TodoItemFlatNode();
         flatNode.item = node.item;
+        flatNode.id= node.id;
         flatNode.level = level;
         flatNode.expandable = (node.children.length>0);
+        flatNode.hdNumber= node.hdNumber;
         this.flatNodeMap.set(flatNode, node);
         this.nestedNodeMap.set(node, flatNode);
         return flatNode;

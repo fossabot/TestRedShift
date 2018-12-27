@@ -9,7 +9,7 @@
     </mat-form-field>
   </form>
 
-  
+
 Specialization:
 
   <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
@@ -17,7 +17,10 @@ Specialization:
       <button mat-icon-button disabled></button>
       <mat-checkbox class="checklist-leaf-node"
                     [checked]="checklistSelection.isSelected(node)"
-                    (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+                    (change)="todoLeafItemSelectionToggle(node)">
+                    
+                    <span matBadge="{{node.hdNumber}}" matBadgeOverlap="false">  {{node.item}} </span> 
+                  </mat-checkbox>
     </mat-tree-node>
   
     
@@ -30,7 +33,10 @@ Specialization:
       </button>
       <mat-checkbox [checked]="descendantsAllSelected(node)"
                     [indeterminate]="descendantsPartiallySelected(node)"
-                    (change)="todoItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+                    (change)="todoItemSelectionToggle(node)">
+                  
+                    <span matBadge="{{node.hdNumber}}" matBadgeOverlap="false">  {{node.item}} </span> 
+                  </mat-checkbox>
     </mat-tree-node>
   </mat-tree>
   
