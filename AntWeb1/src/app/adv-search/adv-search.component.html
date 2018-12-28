@@ -1,13 +1,5 @@
-<form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input type="text" placeholder="Pick Topic" aria-label="Number" matInput [formControl]="topicSearch" [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFnTopic" (optionSelected)="topicSelected($event.option.value)">
-        <mat-option *ngFor="let option of topics" [value]="option">
-          <span matBadge="{{option.hdNumber}}" matBadgeOverlap="false">{{ option.name }} </span> 
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
+<app-mat-tree-hd name="Topics" (startSearchOnMe)="startSearch()" (results)="onResultsTopic($event)" ></app-mat-tree-hd>
+
 
 
 Specialization:

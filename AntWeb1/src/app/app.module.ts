@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdvSearchComponent } from './adv-search/adv-search.component';
 import { OldSearchComponent } from './old-search/old-search.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { MatTreeHDComponent } from './mat-tree-hd/mat-tree-hd.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MovementSearcherComponent,
     AdvSearchComponent,
     OldSearchComponent,
+    MatTreeHDComponent,
   ],
   imports: [
     BrowserModule,

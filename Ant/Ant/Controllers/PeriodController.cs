@@ -78,7 +78,7 @@ namespace Ant.Controllers
             return await t.FindSpecializations();
         }
         [HttpGet("{idTopic}/{idSpecialization}")]
-        public async Task<FindBetweenResult[]> FindAdvanced(long idTopic, long idSpecialization)
+        public async Task<FindBetweenResult[]> FindAdvanced(string idTopic, string idSpecialization)
         {
             return await t.FindAdvanced(idTopic,idSpecialization);
         }

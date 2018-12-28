@@ -343,17 +343,17 @@ MIT
 @angular/router
 MIT
 
-@angular/material/core
-
 @angular/material/checkbox
 
 @angular/material/icon
 
+@angular/material/tree
+
+@angular/material/core
+
 @angular/material/form-field
 
 @angular/material/autocomplete
-
-@angular/material/tree
 
 @angular/material/list
 

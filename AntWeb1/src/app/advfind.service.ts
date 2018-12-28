@@ -18,6 +18,12 @@ export class AdvfindService {
     
     return this.http.get<Topic[]>(url);
   }
+  public FindAdvancedTopic(idTopic:Array<number>) : Observable<FindBetweenResult[]> {
+    idTopic= idTopic || [];
+    const tops=idTopic.join("-");
+    const url = environment.urlApi +  this.periodApi + 'FindAdvanced/'+ tops+'/0' ;
+    return this.http.get<FindBetweenResult[]>(url);
+  }
 
   public FindAdvanced(idTopic:number, idSpec : number) : Observable<FindBetweenResult[]> {
     idTopic= idTopic || 0;

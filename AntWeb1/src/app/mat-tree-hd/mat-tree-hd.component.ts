@@ -1,27 +1,48 @@
-import { Component, OnInit } from '@angular/core';
-import { AdvfindService } from '../advfind.service';
-import { Observable } from 'rxjs';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { TodoItemFlatNode } from '../adv-search/TodoItemFlatNode';
+import { TodoItemNode } from '../adv-search/TodoItemNode';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
 import { Topic } from '../topic';
-import { FoundResultsService } from '../found-results.service';
 import { FormControl } from '@angular/forms';
+import { ChecklistDatabase } from '../adv-search/ChecklistDatabase';
+import { AdvfindService } from '../advfind.service';
+import { FoundResultsService } from '../found-results.service';
 import { FindBetweenResult } from '../classes/interval';
-import {SelectionModel} from '@angular/cdk/collections';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import { findReadVarNames } from '@angular/compiler/src/output/output_ast';
-import { TodoItemNode } from './TodoItemNode';
-import { TodoItemFlatNode } from './TodoItemFlatNode';
-import { ChecklistDatabase } from './ChecklistDatabase';
 
 @Component({
-  selector: 'app-adv-search',
-  templateUrl: './adv-search.component.html',
-  styleUrls: ['./adv-search.component.css'],
-  providers: [ChecklistDatabase]
+  selector: 'app-mat-tree-hd',
+  templateUrl: './mat-tree-hd.component.html',
+  styleUrls: ['./mat-tree-hd.component.css']
 })
-export class AdvSearchComponent implements OnInit {
+export class MatTreeHDComponent implements OnInit {
+  private _name: string;
+  @Output() 
+  results = new EventEmitter<FindBetweenResult[]>();
 
- /** Map from flat node to nested node. This helps us finding the nested node to be modified */
+  @Output() 
+  startSearchOnMe= new EventEmitter();
+  @Input() set name(value : string){
+    this._name=value;
+    switch(value.toLocaleLowerCase()){
+      case "topics":
+        this.database.initializeTopics();
+        break;
+      case "specialization":
+        this.database.initializeSpecialization();
+        break;
+      default:
+        console.log("do not understand "+value);
+    }
+    
+
+  }
+  get name():string{
+    return this._name;
+  }
+
+  /** Map from flat node to nested node. This helps us finding the nested node to be modified */
  flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
 
  /** Map from nested node to flattened node. This helps us to keep the same object for selection */
@@ -40,20 +61,20 @@ export class AdvSearchComponent implements OnInit {
  /** The selection for checklist */
  checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
 
-
+  database :  ChecklistDatabase;
   topics:Topic[];
   public topicSearch = new FormControl();
-  constructor(private database: ChecklistDatabase ,private adv: AdvfindService, private fs: FoundResultsService) { 
+  constructor(private adv: AdvfindService, private fs: FoundResultsService) { 
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
       this.isExpandable, this.getChildren);
     this.treeControl = new FlatTreeControl<TodoItemFlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
       
-    database.dataChange.subscribe(data => {
-      this.dataSource.data = data;
-    });
-     database["initializeSpecialization"]();
-    //database.initializeTopics();
+      this.database =new ChecklistDatabase(adv);
+      this.database.dataChange.subscribe(data => {
+       this.dataSource.data = data;
+      });
+      
       }
 
 
@@ -120,13 +141,18 @@ export class AdvSearchComponent implements OnInit {
     
       /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
       todoLeafItemSelectionToggle(node: TodoItemFlatNode): void {
-        this.selectedSpec=node.id;
-        this.searchAdv();
+        
         this.checklistSelection.toggle(node);
         this.checkAllParentsSelection(node);
-        
+        this.search();
       }
-    
+      search(){
+        this.startSearchOnMe.emit();
+          var ids=this.checklistSelection.selected.map(it=>it.id);
+          this.adv.FindAdvancedTopic(ids).subscribe(it=>{
+            this.results.emit(it);
+          });
+      }
       /* Checks all the parents when a leaf node is selected/unselected */
       checkAllParentsSelection(node: TodoItemFlatNode): void {
         let parent: TodoItemFlatNode | null = this.getParentNode(node);
@@ -170,42 +196,8 @@ export class AdvSearchComponent implements OnInit {
         return null;
       }
     
-
-  ngOnInit() {
-    this.selectedSpec=0;
-    this.selectedTopic=0;
-    this.adv.getTopics().subscribe(it=>{
-      this.topics = it;    
-    });
-  }
-  public displayFnTopic(c?: Topic): string | undefined {
-    return c ?  c.name : undefined;
-  }
-  public searchAdv(){
-    //window.alert('search');
-    this.startSearch();
-    this.adv.FindAdvanced(this.selectedTopic,this.selectedSpec).subscribe(it=>{
-      this.fs.NextRest(it);
-    });
-  }
-  public startSearch(){
-    var fArr=[];
-    var f=new FindBetweenResult();
-    f.id=0;
-    f.name="Loading data ... please wait";
-    fArr.push(f);
-    this.fs.NextRest(fArr);
-  }
-  public onResultsTopic(fdr:FindBetweenResult[]){
-    //window.alert('received');
-    this.fs.NextRest(fdr);
-  }
-  private selectedTopic: number;
-  private selectedSpec: number;
-  public topicSelected(t?:Topic){
-    window.alert('selected');
-    this.selectedTopic = t.id;
+      ngOnInit(): void {
     
-    this.searchAdv();
-  }
+      }
+
 }
