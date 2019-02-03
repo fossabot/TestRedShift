@@ -184,7 +184,12 @@ export class AdvSearchComponent implements OnInit {
   public searchAdv(){
     //window.alert('search');
     this.startSearch();
-    this.adv.FindAdvanced(this.selectedTopic,this.selectedSpec).subscribe(it=>{
+    // this.adv.FindAdvanced(this.selectedTopic,this.selectedSpec).subscribe(it=>{
+    //   this.fs.NextRest(it);
+    // });
+
+    var ids=this.checklistSelection.selected.map(it=>it.id);
+    this.adv.FindAdvancedSpec(ids).subscribe(it=>{
       this.fs.NextRest(it);
     });
   }

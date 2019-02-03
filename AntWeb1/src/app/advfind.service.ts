@@ -31,6 +31,13 @@ export class AdvfindService {
     const url = environment.urlApi +  this.periodApi + 'FindAdvanced/'+ idTopic +'/'+idSpec;
     return this.http.get<FindBetweenResult[]>(url);
   }
+  public FindAdvancedSpec(idSpec : Array<number>) : Observable<FindBetweenResult[]> {
+    ;
+    idSpec =idSpec  || [];
+    const specs=idSpec.join("-");
+    const url = environment.urlApi +  this.periodApi + 'FindAdvanced/0' +'/'+specs;
+    return this.http.get<FindBetweenResult[]>(url);
+  }
   public getSpecializations():Observable<Specialization[]>{
     const url = environment.urlApi +  this.periodApi + 'findspecializations';
     
