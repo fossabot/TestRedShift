@@ -116,6 +116,7 @@ export class AdvSearchComponent implements OnInit {
           this.checklistSelection.isSelected(child)
         );
         this.checkAllParentsSelection(node);
+        this.searchAdv();
       }
     
       /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
