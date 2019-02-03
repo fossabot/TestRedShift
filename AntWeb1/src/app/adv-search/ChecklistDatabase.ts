@@ -48,7 +48,11 @@ export class ChecklistDatabase {
         it.forEach((spec) => {
           var item = data.FindParent(spec.idParent);
           if (item != null) {
-            item.children.push(TodoItemNode.FromSpec(spec));
+            var newNode = TodoItemNode.FromSpec(spec);
+            var id = newNode.id;
+            if(item.children.filter(c=>c.id ==id).length == 0){
+              item.children.push(TodoItemNode.FromSpec(spec));
+            }
             const index = newArr.indexOf(spec, 0);
             newArr.splice(index, 1);
           }
