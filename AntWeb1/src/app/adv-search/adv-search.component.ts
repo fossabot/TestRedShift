@@ -121,10 +121,10 @@ export class AdvSearchComponent implements OnInit {
       /** Toggle a leaf to-do item selection. Check all the parents to see if they changed */
       todoLeafItemSelectionToggle(node: TodoItemFlatNode): void {
         this.selectedSpec=node.id;
-        this.searchAdv();
+       
         this.checklistSelection.toggle(node);
         this.checkAllParentsSelection(node);
-        
+        this.searchAdv();
       }
     
       /* Checks all the parents when a leaf node is selected/unselected */
@@ -187,7 +187,7 @@ export class AdvSearchComponent implements OnInit {
     // this.adv.FindAdvanced(this.selectedTopic,this.selectedSpec).subscribe(it=>{
     //   this.fs.NextRest(it);
     // });
-
+    
     var ids=this.checklistSelection.selected.map(it=>it.id);
     this.adv.FindAdvancedSpec(ids).subscribe(it=>{
       this.fs.NextRest(it);
@@ -208,7 +208,7 @@ export class AdvSearchComponent implements OnInit {
   private selectedTopic: number;
   private selectedSpec: number;
   public topicSelected(t?:Topic){
-    window.alert('selected');
+    //window.alert('selected');
     this.selectedTopic = t.id;
     
     this.searchAdv();
