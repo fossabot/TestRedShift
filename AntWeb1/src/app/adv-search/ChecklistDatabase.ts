@@ -58,11 +58,12 @@ export class ChecklistDatabase {
             }
           }
         });
+        
         if(newArr.length == latestNumber){
+          console.table(data);
           console.table(newArr);
-          console.table(it);
-          window.alert('error loading parents');
-          return;
+          //window.alert('error loading parents');
+          break;
         }
       }
       this.dataChange.next(data);
