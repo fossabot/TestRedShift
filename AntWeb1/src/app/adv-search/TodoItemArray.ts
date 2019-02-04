@@ -20,7 +20,7 @@ export class TodoItemArray extends Array<TodoItemNode> {
       var ret = this.findRec(element, id);
       if (ret != null){
         if(this.tolog(id)){
-          console.log('found in find parent!');
+          console.log(`found in find parent ${element.id}!`);
         }
         return ret;
       }
@@ -35,7 +35,7 @@ export class TodoItemArray extends Array<TodoItemNode> {
       return null;
     if (t.id == id){
       if(this.tolog(id)){
-        console.log('found in find rec direct!');
+        console.log(`found in find rec direct!`);
       }
       
       return t;
@@ -43,18 +43,20 @@ export class TodoItemArray extends Array<TodoItemNode> {
     const lengthChilder = t.children.length;
     for (let index = 0; index < length; index++) {
       const element = t.children[index];
-      console.log(`iterating child {element.id}`);
+      if(this.tolog(id)){
+      console.log(`iterating child ${element.id}`);
+      }
       const ret = this.findRec(element, id);
       if (ret != null){
         if(this.tolog(id)){
-          console.log('found in find rec!');
+          console.log(`found in find rec  ${t.id}!`);
         }
         
         return ret;
       }
     }
     if(this.tolog(id)){
-      console.log('not found in find rec!');
+      console.log(`not found in find rec ${t.id}!`);
     }
     
     return null;
