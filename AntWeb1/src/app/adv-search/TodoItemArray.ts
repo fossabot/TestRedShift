@@ -33,6 +33,9 @@ export class TodoItemArray extends Array<TodoItemNode> {
   private findRec(t: TodoItemNode, id: number): TodoItemNode {
     if (t == null)
       return null;
+    if(t == undefined)
+      return null;
+      
     if (t.id == id){
       if(this.tolog(id)){
         console.log(`found in find rec direct!`);
@@ -49,7 +52,7 @@ export class TodoItemArray extends Array<TodoItemNode> {
       const ret = this.findRec(element, id);
       if (ret != null){
         if(this.tolog(id)){
-          console.log(`found in find rec  ${t.id}!`);
+          console.log(`found in find rec  ${ret.id}!`);
         }
         
         return ret;
