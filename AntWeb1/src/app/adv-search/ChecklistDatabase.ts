@@ -42,7 +42,8 @@ export class ChecklistDatabase {
       });
       console.log(`after removing null : ${newArr.length}`);
       while (newArr.length > 0) {
-        console.log(`number elements : ${newArr.length}`);
+        var latestNumber= newArr.length;
+        console.log(`number elements : ${latestNumber}`);
         it.forEach(spec => {
           if (spec.idParent != null) {
             var item = data.FindParent(spec.idParent);
@@ -57,6 +58,12 @@ export class ChecklistDatabase {
             }
           }
         });
+        if(newArr.length == latestNumber){
+          console.table(newArr);
+          console.table(it);
+          window.alert('error loading parents');
+          return;
+        }
       }
       this.dataChange.next(data);
     });
