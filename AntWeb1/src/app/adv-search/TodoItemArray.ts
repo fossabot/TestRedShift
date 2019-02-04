@@ -35,7 +35,7 @@ export class TodoItemArray extends Array<TodoItemNode> {
       return null;
     if(t == undefined)
       return null;
-      
+
     if (t.id == id){
       if(this.tolog(id)){
         console.log(`found in find rec direct!`);
@@ -44,8 +44,13 @@ export class TodoItemArray extends Array<TodoItemNode> {
       return t;
     }
     const lengthChilder = t.children.length;
-    for (let index = 0; index < length; index++) {
+    if(this.tolog(id)){
+      console.log(`iterating for  childs of ${t.id} in number ${lengthChilder} `);
+      }
+    for (let index = 0; index < lengthChilder; index++) {
       const element = t.children[index];
+      if(element == null)
+        continue;
       if(this.tolog(id)){
       console.log(`iterating child ${element.id}`);
       }
