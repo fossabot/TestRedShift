@@ -39,22 +39,28 @@ export class ChecklistDatabase {
         if (spec.idParent == null) {
           data.push(TodoItemNode.FromSpec(spec));
           const index = newArr.indexOf(spec, 0);
-          newArr.splice(index, 1);
+          newArr = newArr.splice(index, 1);
         }
       });
       console.log(`after removing null : ${newArr.length}`);
       while (newArr.length > 0) {
         console.log(`number elements : ${newArr.length}`);
         it.forEach((spec) => {
+          if(spec.idParent == null)
+            return;
+
           var item = data.FindParent(spec.idParent);
           if (item != null) {
-            var newNode = TodoItemNode.FromSpec(spec);
-            var id = newNode.id;
+            var id = spec.id;
             if(item.children.filter(c=>c.id ==id).length == 0){
-              item.children.push(TodoItemNode.FromSpec(spec));
-            }
-            const index = newArr.indexOf(spec, 0);
-            newArr.splice(index, 1);
+
+              var newNode = TodoItemNode.FromSpec(spec);
+              item.children.push(newNode);
+              const index = newArr.findIndex(it=>it.id == id);
+              newArr = newArr.splice(index, 1);
+            
+            }            
+            
           }
         });
       }
