@@ -4,11 +4,11 @@
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
     <button mat-icon-button disabled></button>
-    <mat-checkbox class="checklist-leaf-node"
+    <mat-checkbox class="checklist-leaf-node" title="{{node.item}} {{node.hdNumber}}"
                   [checked]="checklistSelection.isSelected(node)"
                   (change)="todoLeafItemSelectionToggle(node)">
                   
-                  <span matBadge="{{node.hdNumber}}" matBadgeOverlap="false">  {{node.item}} </span> 
+                  <span matBadge="{{node.hdNumber}}"  matBadgeOverlap="false" title="{{node.item}} {{node.hdNumber}}" >  {{node.item}} </span> 
                 </mat-checkbox>
   </mat-tree-node>
 
@@ -24,7 +24,7 @@
                   [indeterminate]="descendantsPartiallySelected(node)"
                   (change)="todoItemSelectionToggle(node)">
                 
-                  <span matBadge="{{node.hdNumber}}" matBadgeOverlap="false">  {{node.item}} </span> 
+                  <span matBadge="{{node.hdNumber}}"  matBadgeOverlap="false" title="{{node.item}} {{node.hdNumber}}" >  {{node.item}} </span> 
                 </mat-checkbox>
   </mat-tree-node>
 </mat-tree>
