@@ -12,7 +12,13 @@ import { findReadVarNames } from '@angular/compiler/src/output/output_ast';
 import { TodoItemNode } from './TodoItemNode';
 import { TodoItemFlatNode } from './TodoItemFlatNode';
 import { ChecklistDatabase } from './ChecklistDatabase';
+import { Specialization } from '../Specialization';
 
+// export type WhatToFind= "Topic" | "Specialization";
+enum WhatToFind{
+  Topic= "Topic",
+  Specialization = "Specialization"
+}
 @Component({
   selector: 'app-adv-search',
   templateUrl: './adv-search.component.html',
@@ -202,9 +208,47 @@ export class AdvSearchComponent implements OnInit {
     fArr.push(f);
     this.fs.NextRest(fArr);
   }
-  public onResultsTopic(fdr:FindBetweenResult[]){
+  public onResultsTopic(items:TodoItemFlatNode[]){
     //window.alert('received');
-    this.fs.NextRest(fdr);
+    
+    this.WhatToFindDict.set(WhatToFind.Topic,items)
+    //window.alert("received "+items.length);
+
+    // var ids=items.map(it=>it.id);
+    this.Search();
+    // this.adv.FindAdvancedTopic(ids).subscribe(fdr=>{
+    //     //window.alert(fdr.length);
+    //     this.fs.NextRest(fdr);
+    //  });
+   
+  }
+  public Search(){
+    var idsTopic:Array<number>=null;
+    var idsSpecialization:Array<number>=null;
+    //window.alert(this.WhatToFindDict.has(WhatToFind.Topic));
+    if(this.WhatToFindDict.has(WhatToFind.Topic)){
+      var arr= this.WhatToFindDict.get(WhatToFind.Topic);
+      if(arr != null)
+        idsTopic = arr.map(it=>it.id);
+    }
+    if(this.WhatToFindDict.has(WhatToFind.Specialization)){
+      var arr= this.WhatToFindDict.get(WhatToFind.Specialization);
+      if(arr != null)
+        idsSpecialization = arr.map(it=>it.id);
+    }
+    //window.alert(idsTopic.length);
+    this.adv.FindAdvanced(idsTopic,idsSpecialization).subscribe(fdr=>this.fs.NextRest(fdr));
+
+  }
+  
+  public WhatToFindDict =new Map<WhatToFind,TodoItemFlatNode[]> ();
+
+  public onResultsSpecialization(items:TodoItemFlatNode[]){
+   
+     
+    this.WhatToFindDict.set(WhatToFind.Specialization,items);
+    this.Search();
+    
   }
   private selectedTopic: number;
   private selectedSpec: number;

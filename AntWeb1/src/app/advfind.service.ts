@@ -25,14 +25,16 @@ export class AdvfindService {
     return this.http.get<FindBetweenResult[]>(url);
   }
 
-  public FindAdvanced(idTopic:number, idSpec : number) : Observable<FindBetweenResult[]> {
-    idTopic= idTopic || 0;
-    idSpec =idSpec || 0;
-    const url = environment.urlApi +  this.periodApi + 'FindAdvanced/'+ idTopic +'/'+idSpec;
+  public FindAdvanced(idTopic:Array<number>, idSpec : Array<number>) : Observable<FindBetweenResult[]> {
+    idSpec =idSpec  || [0];
+    idTopic= idTopic || [0];
+    const tops=idTopic.join("-");
+    const specs=idSpec.join("-");
+    const url = environment.urlApi +  this.periodApi + 'FindAdvanced/'+ tops +'/'+specs;
     return this.http.get<FindBetweenResult[]>(url);
   }
   public FindAdvancedSpec(idSpec : Array<number>) : Observable<FindBetweenResult[]> {
-    ;
+    
     idSpec =idSpec  || [];
     const specs=idSpec.join("-");
     const url = environment.urlApi +  this.periodApi + 'FindAdvanced/0' +'/'+specs;
