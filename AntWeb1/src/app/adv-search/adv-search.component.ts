@@ -225,17 +225,23 @@ export class AdvSearchComponent implements OnInit {
   public Search(){
     var idsTopic:Array<number>=null;
     var idsSpecialization:Array<number>=null;
+    var arrFind= new Array<TodoItemFlatNode>();
     //window.alert(this.WhatToFindDict.has(WhatToFind.Topic));
     if(this.WhatToFindDict.has(WhatToFind.Topic)){
       var arr= this.WhatToFindDict.get(WhatToFind.Topic);
-      if(arr != null)
+      if(arr != null){
+        arrFind.push(...arr);
         idsTopic = arr.map(it=>it.id);
+      }
     }
     if(this.WhatToFindDict.has(WhatToFind.Specialization)){
       var arr= this.WhatToFindDict.get(WhatToFind.Specialization);
-      if(arr != null)
+      if(arr != null){
+        arrFind.push(...arr);
         idsSpecialization = arr.map(it=>it.id);
+      }
     }
+    this.fs.NextFind(arrFind);
     //window.alert(idsTopic.length);
     this.adv.FindAdvanced(idsTopic,idsSpecialization).subscribe(fdr=>this.fs.NextRest(fdr));
 

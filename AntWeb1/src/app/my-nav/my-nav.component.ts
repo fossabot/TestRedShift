@@ -6,6 +6,7 @@ import { FindBetween, FindBetweenResult, Country, Movement } from '../classes/in
 import { PeriodService } from '../services/period.service';
 import { MovementSearcherComponent } from '../movement-searcher/movement-searcher.component';
 import { FoundResultsService } from '../found-results.service';
+import { TodoItemFlatNode } from '../adv-search/TodoItemFlatNode';
 
 
 @Component({
@@ -25,8 +26,10 @@ export class MyNavComponent {
     
   constructor(private breakpointObserver: BreakpointObserver, private fs: FoundResultsService) {
     fs.Obs().subscribe(it=> this.found=it);
+    fs.ObsFind().subscribe(it=>this.WhatToFind=it);
 
   }
+  public WhatToFind: TodoItemFlatNode[];
   public message:string;
   public found: Array<FindBetweenResult>;
   public myalert(t: FindBetweenResult ){

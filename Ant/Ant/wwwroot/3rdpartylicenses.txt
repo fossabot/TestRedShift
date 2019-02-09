@@ -357,6 +357,8 @@ MIT
 
 @angular/material/list
 
+@angular/material/chips
+
 @angular/material/card
 
 @angular/material/sidenav

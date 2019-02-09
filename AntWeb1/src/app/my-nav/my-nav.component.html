@@ -46,7 +46,15 @@
       </mat-expansion-panel>
     </mat-accordion>
 
-    {{ message}}  {{found?.length}}
+    {{ message}}  {{found?.length}} 
+    <span *ngIf="WhatToFind?.length>0">
+
+      <mat-chip-list>
+
+        <mat-chip *ngFor="let w of WhatToFind" color="primary" selected>{{w.item}}</mat-chip>
+       
+      </mat-chip-list>
+    </span>
     <cdk-virtual-scroll-viewport itemSize="2" class="example-viewport">
       <div *cdkVirtualFor="let t of found; let i= index" class="example-item">
        
