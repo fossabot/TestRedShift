@@ -30,7 +30,7 @@ export class ChecklistDatabase {
     //     file node as children.
     this.adv.getSpecializations().subscribe(it => {
       var newArr = it.slice();
-      console.log(`number received : ${newArr.length}`);
+      // console.log(`number received : ${newArr.length}`);
       const data = TodoItemArray.create();
 
       it.forEach(spec => {

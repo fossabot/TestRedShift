@@ -8,7 +8,7 @@ export class TodoItemArray extends Array<TodoItemNode> {
     return Object.create(TodoItemArray.prototype);
   }
   tolog(id:number):boolean{
-    return id==39570;
+    return false;//id==39570;
   }
   public FindParent(id: number): TodoItemNode {
     if(this.tolog(id)){
