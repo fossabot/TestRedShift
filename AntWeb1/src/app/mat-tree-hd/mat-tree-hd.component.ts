@@ -149,9 +149,21 @@ export class MatTreeHDComponent implements OnInit {
       search(){
         this.startSearchOnMe.emit();
           var ids=this.checklistSelection.selected.map(it=>it.id);
-          this.adv.FindAdvancedTopic(ids).subscribe(it=>{
-            this.results.emit(it);
-          });
+          switch(this.name.toLowerCase()){
+            case "topics":
+              this.adv.FindAdvancedTopic(ids).subscribe(it=>{
+                this.results.emit(it);
+              });
+              break;
+            case "specialization":
+              this.adv.FindAdvancedSpec(ids).subscribe(it=>{
+                this.results.emit(it);
+              });
+              break;
+            default:
+              console.log("do not understand "+this.name);
+          }
+          
       }
       /* Checks all the parents when a leaf node is selected/unselected */
       checkAllParentsSelection(node: TodoItemFlatNode): void {

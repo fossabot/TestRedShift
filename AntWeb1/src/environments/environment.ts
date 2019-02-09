@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlApi:'http://localhost:51385/'
+  urlApi:'https://antiq.herokuapp.com/'
 };
 
 /*
