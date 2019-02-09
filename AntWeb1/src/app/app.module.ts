@@ -19,6 +19,8 @@ import { AdvSearchComponent } from './adv-search/adv-search.component';
 import { OldSearchComponent } from './old-search/old-search.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatTreeHDComponent } from './mat-tree-hd/mat-tree-hd.component';
+import { AboutComponent } from './about/about.component';
+import { VersionsNetcoreAngularModule} from 'versions-netcore-angular';
 
 @NgModule({
   declarations: [
@@ -32,8 +34,10 @@ import { MatTreeHDComponent } from './mat-tree-hd/mat-tree-hd.component';
     AdvSearchComponent,
     OldSearchComponent,
     MatTreeHDComponent,
+    AboutComponent,
   ],
   imports: [
+    VersionsNetcoreAngularModule,
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,

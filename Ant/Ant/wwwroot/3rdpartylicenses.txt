@@ -340,6 +340,17 @@ MIT
 
 @angular/material/snack-bar
 
+versions-netcore-angular
+MIT
+MIT
+
+
+@angular/material/sort
+
+@angular/material/table
+
+@angular/material/form-field
+
 @angular/router
 MIT
 
@@ -350,8 +361,6 @@ MIT
 @angular/material/tree
 
 @angular/material/core
-
-@angular/material/form-field
 
 @angular/material/autocomplete
 
