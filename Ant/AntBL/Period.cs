@@ -30,11 +30,11 @@ namespace AntBL
 
 
         }
-        public async Task<FindBetweenResult[]> FindAdvanced(string idTopic, string idSpec)
+        public async Task<FindBetweenResult[]> FindAdvanced(string idTopic, string idSpec,string idLitMov)
         {
 
 
-            return await t.FindAdvanced(idTopic,idSpec);
+            return await t.FindAdvanced(idTopic,idSpec,idLitMov);
 
 
         }
