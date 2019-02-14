@@ -82,8 +82,13 @@ namespace Ant.Controllers
         {
             return await t.FindLiteraryMovements();
         }
-        [HttpGet("{idTopic}/{idSpecialization}/{idLitMov}")]
-        public async Task<FindBetweenResult[]> FindAdvanced(string idTopic, string idSpecialization,string idLitMov)
+        [HttpGet]
+        public async Task<Specialization[]> FindProf()
+        {
+            return await t.FindProf();
+        }
+        [HttpGet("{idTopic}/{idSpecialization}/{idLitMov}/{idProf}")]
+        public async Task<FindBetweenResult[]> FindAdvanced(string idTopic, string idSpecialization,string idLitMov,string idProf)
         {
             return await t.FindAdvanced(idTopic,idSpecialization,idLitMov);
         }

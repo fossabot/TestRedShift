@@ -105,6 +105,12 @@ namespace AntDAL.Models
             var data = await this.FindSpecialization.FromSql($"select ID, Name, Count as HdNumber, IDParent from [HDLiteraryMovements] order by IDParent ").ToArrayAsync();
             return data;
         }
+        public async Task<Specialization[]> FindProf()
+        {
+            var data = await this.FindSpecialization.FromSql($"select ID, Name, Count as HdNumber, IDParent from [HDProfession] order by IDParent ").ToArrayAsync();
+            return data;
+        }
+        
         public async Task<FindBetweenResult[]> FindAdvanced(string idTopic, string idSpecialization, string idLitMov)
         {
             var data = await this.FindBetweenResult.FromSql($"exec Search {idTopic} , {idSpecialization} , {idLitMov}").ToArrayAsync();
