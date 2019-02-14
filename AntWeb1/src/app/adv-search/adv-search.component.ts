@@ -17,7 +17,8 @@ import { Specialization } from '../Specialization';
 // export type WhatToFind= "Topic" | "Specialization";
 enum WhatToFind{
   Topic= "Topic",
-  Specialization = "Specialization"
+  Specialization = "Specialization",
+  LitMov="LitMov"
 }
 @Component({
   selector: 'app-adv-search',
@@ -225,6 +226,7 @@ export class AdvSearchComponent implements OnInit {
   public Search(){
     var idsTopic:Array<number>=null;
     var idsSpecialization:Array<number>=null;
+    var idsLitMov:Array<number>=null;
     var arrFind= new Array<TodoItemFlatNode>();
     //window.alert(this.WhatToFindDict.has(WhatToFind.Topic));
     if(this.WhatToFindDict.has(WhatToFind.Topic)){
@@ -241,9 +243,16 @@ export class AdvSearchComponent implements OnInit {
         idsSpecialization = arr.map(it=>it.id);
       }
     }
+    if(this.WhatToFindDict.has(WhatToFind.LitMov)){
+      var arr= this.WhatToFindDict.get(WhatToFind.LitMov);
+      if(arr != null){
+        arrFind.push(...arr);
+        idsLitMov = arr.map(it=>it.id);
+      }
+    }
     this.fs.NextFind(arrFind);
     //window.alert(idsTopic.length);
-    this.adv.FindAdvanced(idsTopic,idsSpecialization).subscribe(fdr=>this.fs.NextRest(fdr));
+    this.adv.FindAdvanced(idsTopic,idsSpecialization,idsLitMov).subscribe(fdr=>this.fs.NextRest(fdr));
 
   }
   
@@ -255,6 +264,10 @@ export class AdvSearchComponent implements OnInit {
     this.WhatToFindDict.set(WhatToFind.Specialization,items);
     this.Search();
     
+  }
+  public onResultsLitMov(items:TodoItemFlatNode[]){
+    this.WhatToFindDict.set(WhatToFind.LitMov,items);
+    this.Search();
   }
   private selectedTopic: number;
   private selectedSpec: number;
