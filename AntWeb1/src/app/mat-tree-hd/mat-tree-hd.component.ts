@@ -35,6 +35,9 @@ export class MatTreeHDComponent implements OnInit {
       case "literarymovements":
         this.database.initializeLiteraryMovements();
         break;
+      case "profession":
+        this.database.initializeProfession();
+        break;
       default:
         console.log("do not understand "+value);
     }

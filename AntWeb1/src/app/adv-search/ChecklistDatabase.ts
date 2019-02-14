@@ -26,6 +26,12 @@ export class ChecklistDatabase {
       this.dataChange.next(data);
     });
   }
+  initializeProfession(){
+    this.adv.getProf().subscribe(it => {
+      var data=this.interpretSpec(it);
+      this.dataChange.next(data);
+    });
+  }
   initializeLiteraryMovements(){
     this.adv.getLitMove().subscribe(it => {
       var data=this.interpretSpec(it);

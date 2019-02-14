@@ -90,7 +90,7 @@ namespace Ant.Controllers
         [HttpGet("{idTopic}/{idSpecialization}/{idLitMov}/{idProf}")]
         public async Task<FindBetweenResult[]> FindAdvanced(string idTopic, string idSpecialization,string idLitMov,string idProf)
         {
-            return await t.FindAdvanced(idTopic,idSpecialization,idLitMov);
+            return await t.FindAdvanced(idTopic,idSpecialization,idLitMov,idProf);
         }
         [HttpPost]
         public async Task<FindBetweenResult[]> Find([FromBody]FindBetween f)

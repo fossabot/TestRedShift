@@ -111,9 +111,9 @@ namespace AntDAL.Models
             return data;
         }
         
-        public async Task<FindBetweenResult[]> FindAdvanced(string idTopic, string idSpecialization, string idLitMov)
+        public async Task<FindBetweenResult[]> FindAdvanced(string idTopic, string idSpecialization, string idLitMov,string idProf)
         {
-            var data = await this.FindBetweenResult.FromSql($"exec Search {idTopic} , {idSpecialization} , {idLitMov}").ToArrayAsync();
+            var data = await this.FindBetweenResult.FromSql($"exec Search {idTopic} , {idSpecialization} , {idLitMov}, {idProf}").ToArrayAsync();
             return data;
         }
         public async Task<Topic[]> FindTopics()

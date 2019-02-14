@@ -31,12 +31,12 @@ export class AdvfindService {
       }
       return n;
   }
-  public FindAdvanced(idTopic:Array<number>, idSpec : Array<number>, idLitMov : Array<number>) : Observable<FindBetweenResult[]> {
+  public FindAdvanced(idTopic:Array<number>, idSpec : Array<number>, idLitMov : Array<number>, idProf:Array<number>) : Observable<FindBetweenResult[]> {
     const tops=this.put0((idTopic||[]).join("-"));
     const specs=this.put0((idSpec||[]).join("-"));
     const litMov=this.put0((idLitMov||[]).join("-"));
-    
-    const url = environment.urlApi +  this.periodApi + 'FindAdvanced/'+ tops +'/'+specs + '/'+ litMov;
+    const profs=this.put0((idProf||[]).join("-"));
+    const url = environment.urlApi +  this.periodApi + 'FindAdvanced/'+ tops +'/'+specs + '/'+ litMov + '/'+idProf;
     return this.http.get<FindBetweenResult[]>(url);
   }
   public FindAdvancedSpec(idSpec : Array<number>) : Observable<FindBetweenResult[]> {
@@ -46,6 +46,11 @@ export class AdvfindService {
     const url = environment.urlApi +  this.periodApi + 'FindAdvanced/0' +'/'+specs;
     return this.http.get<FindBetweenResult[]>(url);
   }
+  public getProf():Observable<Specialization[]>{
+    const url = environment.urlApi +  this.periodApi + 'FindProf';
+    
+    return this.http.get<Specialization[]>(url);
+  } 
   public getSpecializations():Observable<Specialization[]>{
     const url = environment.urlApi +  this.periodApi + 'findspecializations';
     
