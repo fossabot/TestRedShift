@@ -36,7 +36,7 @@ export class AdvfindService {
     const specs=this.put0((idSpec||[]).join("-"));
     const litMov=this.put0((idLitMov||[]).join("-"));
     const profs=this.put0((idProf||[]).join("-"));
-    const url = environment.urlApi +  this.periodApi + 'FindAdvanced/'+ tops +'/'+specs + '/'+ litMov + '/'+idProf;
+    const url = environment.urlApi +  this.periodApi + 'FindAdvanced/'+ tops +'/'+specs + '/'+ litMov + '/'+profs;
     return this.http.get<FindBetweenResult[]>(url);
   }
   public FindAdvancedSpec(idSpec : Array<number>) : Observable<FindBetweenResult[]> {
