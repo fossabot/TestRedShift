@@ -1,10 +1,10 @@
-<div *ngFor="let nc of newCountries">
+<div >
     <ul>
      <li >
        <span (click)="clickCountry(nc)">{{nc?.name}} Authors: {{ nc?.numberAuthors }}</span>
-       
-          <app-country-new [id]="nc.id" ></app-country-new>
-       
+       <div *ngFor="let nc1 of nc?.childs">
+          <app-country-new [nc]="nc1"  ></app-country-new>       
+       </div>
        
      </li>
     </ul>

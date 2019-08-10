@@ -8,17 +8,17 @@ import { AdvSearchNewService } from "../adv-search-new.service";
   styleUrls: ["./country-new.component.css"]
 })
 export class CountryNewComponent implements OnInit {
-  @Input() id: number;
-  newCountries: NewCountry[];
+  @Input() nc: NewCountry;
+  
   constructor(private adv: AdvSearchNewService) {
-    this.newCountries = [];
+    
   }
 
   ngOnInit() {
-    
-      this.adv.GetCountry(this.id).subscribe(it => {
+      if(this.nc === undefined)
+      this.adv.GetCountry(0).subscribe(it => {
         //window.alert(JSON.stringify(it));
-        this.newCountries = it;
+        this.nc= it[0];
       });
   }
   
