@@ -1,7 +1,9 @@
 <div >
-    <ul>
+    <ul style="list-style-type:none;">
      <li >
+        <mat-icon mat-list-icon (click)="clickCountry(nc)">{{icon}}</mat-icon>
        <span (click)="clickCountry(nc)">{{nc?.name}} Authors: {{ nc?.numberAuthors }}</span>
+       
        <div *ngFor="let nc1 of nc?.childs">
           <app-country-new [nc]="nc1"  ></app-country-new>       
        </div>
@@ -9,3 +11,5 @@
      </li>
     </ul>
   </div>
+
+  

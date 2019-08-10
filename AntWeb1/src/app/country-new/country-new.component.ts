@@ -11,7 +11,7 @@ import { FindBetweenResult } from '../classes/interval';
 })
 export class CountryNewComponent implements OnInit {
   @Input() nc: NewCountry;
-  
+  icon : string="folder";
   constructor(private adv: AdvSearchNewService, private fs: FoundResultsService) {
     
   }
@@ -38,6 +38,9 @@ export class CountryNewComponent implements OnInit {
     c.name = " Loading " + c.name;
     this.adv.GetCountry(c.id).subscribe(newIt => {
       c.childs = newIt;
+      if(c.childs.length == 0){
+        this.icon="";
+      }
       //window.alert(JSON.stringify(newIt));
       c.name = name;
     });
