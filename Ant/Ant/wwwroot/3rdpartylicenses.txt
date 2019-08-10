@@ -362,11 +362,9 @@ MIT
 
 @angular/material/core
 
-@angular/material/list
-
-@angular/material/divider
-
 @angular/material/autocomplete
+
+@angular/material/list
 
 @angular/material/chips
 

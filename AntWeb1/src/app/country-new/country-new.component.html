@@ -1,8 +1,11 @@
 <div *ngFor="let nc of newCountries">
     <ul>
-     <li>
-       {{nc.name}}
-       <app-country-new [newCountries]="nc.childs" *ngIf="nc.childs"></app-country-new>
+     <li >
+       <span (click)="clickCountry(nc)">{{nc?.name}} Authors: {{ nc?.numberAuthors }}</span>
+       
+          <app-country-new [id]="nc.id" ></app-country-new>
+       
+       
      </li>
     </ul>
   </div>

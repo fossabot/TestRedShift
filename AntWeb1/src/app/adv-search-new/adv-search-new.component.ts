@@ -11,21 +11,11 @@ import { NewCountry } from '../NewCountry';
 export class AdvSearchNewComponent implements OnInit {
 
 
-  folders: NewCountry[];
+  //folders: NewCountry[];
   constructor(private  adv: AdvSearchNewService) { }
 
   ngOnInit() {
-      this.adv.GetCountry(0).subscribe(it=>this.folders=it);
+  //    this.adv.GetCountry(0).subscribe(it=>this.folders=it);
   }
-  clickCountry(c: NewCountry){
-    
-    const name=c.name;
-    c.name = " Loading "  + c.name;
-    this.adv.GetCountry(c.id).subscribe(it=>{
-      c.childs=it;
-      c.name = name;
-    });
-    
-    
-  }
+  
 }
