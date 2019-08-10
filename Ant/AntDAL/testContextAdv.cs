@@ -52,10 +52,11 @@ namespace AntDAL.Models
         public int FromDate { get; set; }
         public int ToDate { get; set; }
     }
-    public class NewCountry : GenericData
+    public class NewCountry 
     {
         public int NumberAuthors { get; set; }
-        
+        public long Id { get; set; }
+        public string Name { get; set; }
     }
 
     public class Movement : GenericData
