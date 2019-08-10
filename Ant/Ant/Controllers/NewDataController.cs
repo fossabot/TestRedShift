@@ -27,14 +27,22 @@ namespace Ant.Controllers
             return "pong" + DateTime.Now;
         }
         // GET api/values
-        [HttpGet("{id}")]
+        [HttpGet("{id?}")]
         public async Task<NewCountry[]> GetCountry([FromRoute]long? id)
         {
-            if(id == null)
+            try
             {
-                id = 42614;
+                if (id == null)
+                {
+                    id = 42614;
+                }
+                return await t.FindNewCountries(id.Value);
             }
-            return await t.FindNewCountries(id.Value);
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
 
         }
     }
