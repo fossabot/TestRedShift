@@ -153,10 +153,10 @@ namespace AntDAL.Models
         public async ValueTask<NewCountry[]> FindNewCountries(long id)
         {
             var data = await this.NewCountry.FromSql(
-                $@"select c.id,c.CountryName as Name, count(*)as NumberAuthors from CountryFromKingdoms  c
+                $@"select c.idHDCountry as id,c.CountryName as Name, count(*)as NumberAuthors from CountryFromKingdoms  c
 inner join CountryAuthors ca on ca.IDHDCountry = c.idHDCountry
 where c.idparent = {id}
-group by c.id, c.CountryName").ToArrayAsync();
+group by c.idHDCountry, c.CountryName").ToArrayAsync();
             return data;
                  
         }
