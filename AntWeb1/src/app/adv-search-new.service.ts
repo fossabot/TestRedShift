@@ -5,15 +5,10 @@ import { Observable } from 'rxjs';
 
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
+import { NewCountry } from './NewCountry';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-class NewCountry{
-  public numberAuthors:number ;
-  public  id :number;
-  public name:string; 
-  public idParent :number;
-}
 @Injectable({
   providedIn: 'root'
 })
