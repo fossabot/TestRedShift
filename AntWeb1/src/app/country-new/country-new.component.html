@@ -1,0 +1,8 @@
+<div *ngFor="let nc of newCountries">
+    <ul>
+     <li>
+       {{nc.name}}
+       <app-country-new [newCountries]="nc.childs" *ngIf="nc.childs"></app-country-new>
+     </li>
+    </ul>
+  </div>

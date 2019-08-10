@@ -18,6 +18,14 @@ export class AdvSearchNewComponent implements OnInit {
       this.adv.GetCountry(0).subscribe(it=>this.folders=it);
   }
   clickCountry(c: NewCountry){
-    window.alert(c.id);
+    
+    const name=c.name;
+    c.name = " Loading "  + c.name;
+    this.adv.GetCountry(c.id).subscribe(it=>{
+      c.childs=it;
+      c.name = name;
+    });
+    
+    
   }
 }

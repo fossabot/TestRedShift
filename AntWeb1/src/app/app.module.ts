@@ -22,6 +22,7 @@ import { MatTreeHDComponent } from './mat-tree-hd/mat-tree-hd.component';
 import { AboutComponent } from './about/about.component';
 import { VersionsNetcoreAngularModule} from 'versions-netcore-angular';
 import { AdvSearchNewComponent } from './adv-search-new/adv-search-new.component';
+import { CountryNewComponent } from './country-new/country-new.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AdvSearchNewComponent } from './adv-search-new/adv-search-new.component
     MatTreeHDComponent,
     AboutComponent,
     AdvSearchNewComponent,
+    CountryNewComponent,
   ],
   imports: [
     VersionsNetcoreAngularModule,

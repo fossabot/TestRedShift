@@ -1,12 +1,13 @@
 <mat-list>
-    <h3 mat-subheader>Countries</h3>
-    <mat-list-item *ngFor="let folder of folders">
-      <mat-icon mat-list-icon>folder</mat-icon>
-      <h4 mat-line>{{folder.name}}</h4>
-      <p mat-line> {{folder.numberAuthors}} </p>
+  <h3 mat-subheader>Countries</h3>
+  <mat-list-item *ngFor="let folder of folders">
+    
+      <mat-icon mat-list-icon (click)="clickCountry(folder)">folder</mat-icon>
+      <h4 mat-line (click)="clickCountry(folder)">{{ folder.name }}</h4>
+      <p mat-line (click)="clickCountry(folder)">{{ folder.numberAuthors }}</p>
       <mat-divider></mat-divider>
-    </mat-list-item>
-    
-    
-    
-  </mat-list>
+
+      
+  </mat-list-item>
+</mat-list>
+<app-country-new [newCountries]="folders"></app-country-new>
