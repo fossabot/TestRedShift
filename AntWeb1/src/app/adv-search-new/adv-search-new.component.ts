@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdvSearchNewService } from '../adv-search-new.service';
 export interface Section {
   name: string;
   updated: Date;
@@ -35,9 +36,10 @@ export class AdvSearchNewComponent implements OnInit {
       updated: new Date('1/18/16'),
     }
   ];
-  constructor() { }
+  constructor(private  adv: AdvSearchNewService) { }
 
   ngOnInit() {
+      this.adv.GetCountry(0).subscribe(it=>window.alert(JSON.stringify(it)));
   }
 
 }
