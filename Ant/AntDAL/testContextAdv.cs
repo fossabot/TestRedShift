@@ -156,7 +156,7 @@ namespace AntDAL.Models
             var data = await this.FindBetweenResult.FromSql(
                 $@"
 select 
-hd.IDHD as id, hd.Name , GETDATE() as FromDate , GETUTCDATE() as ToDate
+hd.IDHD as id, hd.Name , 1 as FromDate , 2 as ToDate
 from CountryAuthors  ca  with (nolock)
 inner join HierarchicalDictionary hd with (nolock) on ca.IDHDAuthor= hd.IDHD
 where ca.IDHDCountry = {id}").ToArrayAsync();

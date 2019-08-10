@@ -32,6 +32,7 @@ export class CountryNewComponent implements OnInit {
     f.name=`Loading data ${c.name}... please wait`;
     fArr.push(f);
     this.fs.NextRest(fArr);
+    this.adv.GetAuthorsNewCountry(c.id).subscribe(it=>this.fs.NextRest(it));
     
     const name = c.name;
     c.name = " Loading " + c.name;
