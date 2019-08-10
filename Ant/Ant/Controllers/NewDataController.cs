@@ -45,5 +45,22 @@ namespace Ant.Controllers
             }
 
         }
+        [HttpGet("{id?}")]
+        public async Task<FindBetweenResult[]> GetAuthorsNewCountry([FromRoute]long? id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    id = 42614;
+                }
+                return await t.GetAuthorsNewCountry(id.Value);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
     }
 }

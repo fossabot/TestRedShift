@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { NewCountry } from "../NewCountry";
 import { AdvSearchNewService } from "../adv-search-new.service";
+import { FoundResultsService } from '../found-results.service';
+import { FindBetweenResult } from '../classes/interval';
 
 @Component({
   selector: "app-country-new",
@@ -10,7 +12,7 @@ import { AdvSearchNewService } from "../adv-search-new.service";
 export class CountryNewComponent implements OnInit {
   @Input() nc: NewCountry;
   
-  constructor(private adv: AdvSearchNewService) {
+  constructor(private adv: AdvSearchNewService, private fs: FoundResultsService) {
     
   }
 
@@ -24,6 +26,13 @@ export class CountryNewComponent implements OnInit {
   
 
   clickCountry(c : NewCountry) {
+    var fArr=[];
+    var f=new FindBetweenResult();
+    f.id=0;
+    f.name=`Loading data ${c.name}... please wait`;
+    fArr.push(f);
+    this.fs.NextRest(fArr);
+    
     const name = c.name;
     c.name = " Loading " + c.name;
     this.adv.GetCountry(c.id).subscribe(newIt => {

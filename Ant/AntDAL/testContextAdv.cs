@@ -151,6 +151,19 @@ namespace AntDAL.Models
             Console.WriteLine("connection is" + cn);
             return cn;
         }
+        public async ValueTask<FindBetweenResult[]> GetAuthorsNewCountry(long id)
+        {
+            var data = await this.FindBetweenResult.FromSql(
+                $@"
+select 
+hd.IDHD as id, hd.Name , GETDATE() as FromDate , GETUTCDATE() as ToDate
+from CountryAuthors  ca  with (nolock)
+inner join HierarchicalDictionary hd with (nolock) on ca.IDHDAuthor= hd.IDHD
+where ca.IDHDCountry = {id}").ToArrayAsync();
+            
+            return data;
+
+        }
         public async ValueTask<NewCountry[]> FindNewCountries(long id)
         {
             var data = await this.NewCountry.FromSql(
