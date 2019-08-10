@@ -33,12 +33,12 @@ export class CountryNewComponent implements OnInit {
     fArr.push(f);
     this.fs.NextRest(fArr);
     this.adv.GetAuthorsNewCountry(c.id).subscribe(it=>this.fs.NextRest(it));
-    
+
     const name = c.name;
     c.name = " Loading " + c.name;
     this.adv.GetCountry(c.id).subscribe(newIt => {
       c.childs = newIt;
-      window.alert(JSON.stringify(newIt));
+      //window.alert(JSON.stringify(newIt));
       c.name = name;
     });
   }
