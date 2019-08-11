@@ -26,6 +26,7 @@ export class CountryNewComponent implements OnInit {
   
 
   clickCountry(c : NewCountry) {
+    
     var fArr=[];
     var f=new FindBetweenResult();
     f.id=0;
@@ -34,8 +35,14 @@ export class CountryNewComponent implements OnInit {
     this.fs.NextRest(fArr);
     this.adv.GetAuthorsNewCountry(c.id).subscribe(it=>this.fs.NextRest(it));
 
+    if((c.childs ||[]).length>0){
+      c.childs=[];
+      return; 
+    }
     const name = c.name;
     c.name = " Loading " + c.name;
+    
+    
     this.adv.GetCountry(c.id).subscribe(newIt => {
       c.childs = newIt;
       if(c.childs.length == 0){
