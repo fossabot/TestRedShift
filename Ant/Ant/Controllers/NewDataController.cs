@@ -36,6 +36,7 @@ namespace Ant.Controllers
                 {
                     id = 42614;
                     id = 42613;
+                    id = 0;
                 }
                 return await t.FindNewCountries(id.Value);
             }
