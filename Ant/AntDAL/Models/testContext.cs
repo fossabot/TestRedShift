@@ -8,6 +8,7 @@ namespace AntDAL.Models
     {
         public testContext()
         {
+            this.Database.SetCommandTimeout(120);
         }
 
         public testContext(DbContextOptions<testContext> options)
