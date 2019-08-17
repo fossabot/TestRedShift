@@ -14,6 +14,8 @@ namespace AntDAL.Models
         public testContext(DbContextOptions<testContext> options)
             : base(options)
         {
+            this.Database.SetCommandTimeout(120);
+            
         }
 
         public virtual DbSet<Hdperiod> Hdperiod { get; set; }

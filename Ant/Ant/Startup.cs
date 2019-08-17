@@ -36,7 +36,9 @@ namespace Ant
 
 
             var connection = testContext.ConnectionSqlServer();
-            services.AddDbContext<testContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<testContext>(options => 
+                    options.UseSqlServer(
+                connection,(opt)=>opt.CommandTimeout(120)));
             services.AddScoped<Period>();
         }
 
