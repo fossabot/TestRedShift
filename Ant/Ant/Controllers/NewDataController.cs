@@ -47,6 +47,27 @@ namespace Ant.Controllers
             }
 
         }
+        [HttpGet("{id}")]
+        public async Task<GenericData[]> GetParent([FromRoute]long id)
+        {
+            try
+            {
+                return await t.GetParent(id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                var l = new List<GenericData>();
+                l.Add( new GenericData()
+                {
+                    Id = 0,
+                    Name = ex.Message
+                });
+                return l.ToArray();
+            }
+
+        }
+
         [HttpGet("{id?}")]
         public async Task<FindBetweenResult[]> GetAuthorsNewCountry([FromRoute]long? id)
         {

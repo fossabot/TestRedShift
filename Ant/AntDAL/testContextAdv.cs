@@ -94,7 +94,7 @@ namespace AntDAL.Models
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<NewCountry> NewCountry { get; set; }
         public virtual DbSet<Movement> Movement { get; set; }
-        
+        public virtual DbSet<GenericData> GenericData { get; set; }
         public async Task<FindBetweenResult[]> Find(FindBetween f)
         {
              
@@ -192,6 +192,11 @@ group by c.idHDCountry, c.CountryName").ToArrayAsync();
             return data;
 
         }
-        
+
+        public async ValueTask<GenericData[]> GetParent(long id)
+        {
+            var data = await this.GenericData.FromSql($"exec parentHD {id}").ToArrayAsync();
+            return data;
+        }
     }
 }
