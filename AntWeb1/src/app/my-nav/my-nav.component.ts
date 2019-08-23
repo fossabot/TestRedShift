@@ -7,6 +7,7 @@ import { PeriodService } from '../services/period.service';
 import { MovementSearcherComponent } from '../movement-searcher/movement-searcher.component';
 import { FoundResultsService } from '../found-results.service';
 import { TodoItemFlatNode } from '../adv-search/TodoItemFlatNode';
+import { AdvSearchNewService } from '../adv-search-new.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class MyNavComponent {
       map(result => result.matches)
     );
     
-  constructor(private breakpointObserver: BreakpointObserver, private fs: FoundResultsService) {
+  constructor(private breakpointObserver: BreakpointObserver, private fs: FoundResultsService, private adv: AdvSearchNewService) {
     fs.Obs().subscribe(it=> this.found=it);
     fs.ObsFind().subscribe(it=>this.WhatToFind=it);
 
@@ -34,6 +35,10 @@ export class MyNavComponent {
   public found: Array<FindBetweenResult>;
   public myalert(t: FindBetweenResult ){
     window.alert('am gasit '+t.id);
+    this.adv.GetParent(t.id).subscribe(it=>{
+      window.alert(JSON.stringify(it));
+    });
+
   }
 
 }

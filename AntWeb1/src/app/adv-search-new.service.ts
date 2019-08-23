@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
 import { NewCountry } from './NewCountry';
-import { FindBetweenResult } from './classes/interval';
+import { FindBetweenResult, GenericData } from './classes/interval';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -31,5 +31,9 @@ export class AdvSearchNewService {
       url+='/'+id;
     }
     return this.http.get<FindBetweenResult[]>(url);
+  }
+  public GetParent(id:number): Observable<GenericData[]>{
+    let url= environment.urlApi +  this.urlAPI + 'getparent/'+id;
+    return this.http.get<GenericData[]>(url);
   }
 }
