@@ -34,9 +34,9 @@ export class MyNavComponent {
   public message:string;
   public found: Array<FindBetweenResult>;
   public myalert(t: FindBetweenResult ){
-    window.alert('am gasit '+t.id);
+    // window.alert('am gasit '+t.id);
     this.adv.GetParent(t.id).subscribe(it=>{
-      var res = it.map(t=>t.name ).join('\r\n');
+      var res = it.map(t=>t.name ).join('\r\n\r\n');
       window.alert(res);
     });
 
