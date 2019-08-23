@@ -23,7 +23,7 @@ export class OldSearchComponent implements OnInit {
   public searchMovement : Movement;
   public movementComponent: MovementSearcherComponent;
   public myalert(t: FindBetweenResult ){
-    window.alert(t.id);
+    window.alert('deci:'+t.id);
   }
   constructor(private breakpointObserver: BreakpointObserver, private ps: PeriodService, private fs: FoundResultsService) {
     this.searchCountry = new Country();
