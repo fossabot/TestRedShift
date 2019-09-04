@@ -44,7 +44,7 @@ export class CountryNewComponent implements OnInit {
     
     
     this.adv.GetCountry(c.id).subscribe(newIt => {
-      c.childs = newIt;
+      c.childs = newIt.sort((a,b)=>a.name.localeCompare(b.name));
       if(c.childs.length == 0){
         this.icon="";
       }
