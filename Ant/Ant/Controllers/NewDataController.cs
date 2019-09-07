@@ -38,7 +38,14 @@ namespace Ant.Controllers
                     id = 42613;
                     id = 0;
                 }
-                return await t.FindNewCountries(id.Value);
+                string name = nameof(GetCountry) + id;
+                if (memoryCache.TryGetValue(name, out NewCountry[] ret))
+                {
+                    return ret;
+                }
+                ret =await t.FindNewCountries(id.Value);
+                memoryCache.Set(name, ret);
+                return ret;
             }
             catch(Exception ex)
             {
@@ -67,7 +74,7 @@ namespace Ant.Controllers
             }
 
         }
-
+        
         [HttpGet("{id?}")]
         public async Task<FindBetweenResult[]> GetAuthorsNewCountry([FromRoute]long? id)
         {
@@ -77,7 +84,14 @@ namespace Ant.Controllers
                 {
                     id = 42614;
                 }
-                return await t.GetAuthorsNewCountry(id.Value);
+                string name = nameof(GetAuthorsNewCountry) + id;
+                if (memoryCache.TryGetValue(name, out FindBetweenResult[] ret))
+                {
+                    return ret;
+                }
+                ret = await t.GetAuthorsNewCountry(id.Value);
+                memoryCache.Set(name, ret);
+                return ret;
             }
             catch (Exception ex)
             {
