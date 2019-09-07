@@ -177,7 +177,7 @@ where ca.IDHDCountry = {id}").ToArrayAsync();
                 $@"
 select c.idHDCountry as id,c.searchCriteria as SearchCriteria, c.CountryName as Name, count(*)as NumberAuthors,c.idHDCountry  as IdParent 
 from CountryFromKingdoms  c
-inner join CountryAuthors ca on ca.IDHDCountry = c.idHDCountry
+left join CountryAuthors ca on ca.IDHDCountry = c.idHDCountry
 where c.idparent = {id}
 group by c.idHDCountry, c.CountryName, c.searchCriteria").ToArrayAsync();
             foreach(var item in data)
