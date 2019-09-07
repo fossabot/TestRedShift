@@ -4,4 +4,5 @@ export class NewCountry {
   public name: string;
   public idParent: number;
   public childs: NewCountry[];
+  public searchCriteria: string;
 }

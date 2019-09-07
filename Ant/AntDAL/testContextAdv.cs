@@ -58,6 +58,8 @@ namespace AntDAL.Models
         public long Id { get; set; }
         public string Name { get; set; }
         public long IdParent { get; set; }
+
+        public string SearchCriteria { get; set; }
     }
 
     public class Movement : GenericData
@@ -173,11 +175,11 @@ where ca.IDHDCountry = {id}").ToArrayAsync();
         {
             var data = await this.NewCountry.FromSql(
                 $@"
-select c.idHDCountry as id,c.CountryName as Name, count(*)as NumberAuthors,c.idHDCountry  as IdParent 
+select c.idHDCountry as id,c.searchCriteria as SearchCriteria, c.CountryName as Name, count(*)as NumberAuthors,c.idHDCountry  as IdParent 
 from CountryFromKingdoms  c
 inner join CountryAuthors ca on ca.IDHDCountry = c.idHDCountry
 where c.idparent = {id}
-group by c.idHDCountry, c.CountryName").ToArrayAsync();
+group by c.idHDCountry, c.CountryName, c.searchCriteria").ToArrayAsync();
             foreach(var item in data)
             {
                 item.IdParent = id;
