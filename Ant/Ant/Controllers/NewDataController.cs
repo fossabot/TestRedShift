@@ -26,6 +26,22 @@ namespace Ant.Controllers
         {
             return "pong" + DateTime.Now;
         }
+        [HttpGet("{id?}")]
+        public string Clear([FromRoute]long? id)
+        {
+            try
+            {
+                string name = nameof(GetCountry) + id;
+                memoryCache.Remove(name);
+                name = nameof(GetAuthorsNewCountry) + id;
+                memoryCache.Remove(name);
+                return "ok";
+            }
+            catch(Exception ex)
+            {
+                return ex.Message;
+            }
+        }
         // GET api/values
         [HttpGet("{id?}")]
         public async Task<NewCountry[]> GetCountry([FromRoute]long? id)
