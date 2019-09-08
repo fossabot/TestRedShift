@@ -175,11 +175,11 @@ where ca.IDHDCountry = {id}").ToArrayAsync();
         {
             var data = await this.NewCountry.FromSql(
                 $@"
-select c.idHDCountry as id,c.searchCriteria as SearchCriteria, c.CountryName as Name, count(ca.ID)as NumberAuthors,c.idHDCountry  as IdParent 
+select c.idHDCountry as id,STRING_AGG(c.searchCriteria,'!') as SearchCriteria, c.CountryName as Name, count(ca.ID)as NumberAuthors,c.idHDCountry  as IdParent 
 from CountryFromKingdoms  c
 left join CountryAuthors ca on  c.idHDCountry=ca.IDHDCountry 
 where c.idparent = {id}
-group by c.idHDCountry, c.CountryName, c.searchCriteria").ToArrayAsync();
+group by c.idHDCountry, c.CountryName").ToArrayAsync();
             foreach(var item in data)
             {
                 item.IdParent = id;
