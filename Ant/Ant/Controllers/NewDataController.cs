@@ -91,7 +91,7 @@ namespace Ant.Controllers
 
         }
         [HttpGet("{id}")]
-        public async Task<GenericData[]> GetParent([FromRoute]string id)
+        public async Task<GenericData[]> SearchCountryFromKingdoms([FromRoute]string id)
         {
             try
             {
