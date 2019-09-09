@@ -161,7 +161,7 @@ namespace AntDAL.Models
             }
             else
             {
-                cn = "Server=.;Database=inforo20190723;Trusted_Connection=True;";
+                cn = "Server=.;Database=inforo20190602;Trusted_Connection=True;";
             }
             Console.WriteLine("connection is" + cn);
             return cn;
@@ -218,12 +218,11 @@ group by c.idHDCountry, c.CountryName").ToArrayAsync();
         }
         public async ValueTask<GenericData[]> SearchCountryFromKingdoms(string name)
         {
-            var namep = new SqlParameter("name", name);
             var data = await this.Parent.FromSql(
-                $@"select idHDCountry as Id, CountryName as Name 
+                $@"select cast(idHDCountry as int) as Id, CountryName as Name 
                 ,0 as orig, 0 as IDhd
                 from CountryFromKingdoms
-                where CountryName like '%@name%'",namep).ToArrayAsync();
+                where CountryName like '%' + {name} + '%'").ToArrayAsync();
             Console.WriteLine($"searching {name} result {data.Length}");
             return data;
         }
