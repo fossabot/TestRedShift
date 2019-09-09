@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AntDAL.Models
@@ -60,6 +61,13 @@ namespace AntDAL.Models
         public long IdParent { get; set; }
 
         public string SearchCriteria { get; set; }
+
+        public void MinimizeSearchCriteria()
+        {
+            var str = SearchCriteria.Split('!').ToHashSet();
+            SearchCriteria = string.Join(",", str);
+
+        }
     }
 
     public class Movement : GenericData
@@ -184,6 +192,8 @@ group by c.idHDCountry, c.CountryName").ToArrayAsync();
             foreach(var item in data)
             {
                 item.IdParent = id;
+                item.MinimizeSearchCriteria();
+
             }
             return data;
                  
