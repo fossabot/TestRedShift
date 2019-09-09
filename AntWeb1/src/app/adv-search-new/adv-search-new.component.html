@@ -11,7 +11,7 @@
   </mat-list-item>
 </mat-list> -->
 <input type="text" id="textSearch" value="romani">
-<button mat-button [matMenuTriggerFor]="menuCountry" >{{FoundCountries?.size}} /{{nrResultsCountries}} </button>
+<button mat-button [matMenuTriggerFor]="menuCountry" *ngIf="FoundCountries?.size>0" >{{FoundCountries?.size}} /{{nrResultsCountries}} </button>
 <mat-menu #menuCountry="matMenu" >
     <ng-container *ngFor="let c of FoundCountries | keyvalue; let i = index">
         <button mat-menu-item [matMenuTriggerFor]="sub_menu" (menuOpened)="menuOpened(c.value)">

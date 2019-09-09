@@ -360,6 +360,8 @@ MIT
 
 @angular/material/tree
 
+@angular/material/menu
+
 @angular/material/core
 
 @angular/material/autocomplete
