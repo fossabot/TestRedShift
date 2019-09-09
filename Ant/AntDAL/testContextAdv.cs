@@ -184,7 +184,7 @@ where ca.IDHDCountry = {id}").ToArrayAsync();
             var data = await this.NewCountry.FromSql(
                 $@"
 select c.idHDCountry as id,
-replace(STRING_AGG(cast(c.searchCriteria as varchar(max)),'!') ,'!!','') as SearchCriteria, c.CountryName as Name, count(ca.ID)as NumberAuthors,c.idHDCountry  as IdParent 
+replace(STRING_AGG(cast(c.searchCriteria as varchar(max)),'!') ,'!!','') as SearchCriteria, c.CountryName as Name, count(distinct ca.ID)as NumberAuthors,c.idHDCountry  as IdParent 
 from CountryFromKingdoms  c
 left join CountryAuthors ca on  c.idHDCountry=ca.IDHDCountry 
 where c.idparent = {id}
