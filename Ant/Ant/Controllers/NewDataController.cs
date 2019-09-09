@@ -90,7 +90,21 @@ namespace Ant.Controllers
             }
 
         }
-        
+        [HttpGet("{id}")]
+        public async Task<GenericData[]> GetParent([FromRoute]string id)
+        {
+            try
+            {
+                return await t.SearchCountryFromKingdoms(id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
+
         [HttpGet("{id?}")]
         public async Task<FindBetweenResult[]> GetAuthorsNewCountry([FromRoute]long? id)
         {

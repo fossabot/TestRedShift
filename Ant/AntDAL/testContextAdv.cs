@@ -216,5 +216,15 @@ group by c.idHDCountry, c.CountryName").ToArrayAsync();
             var data = await this.Parent.FromSql($"exec parentHD {id}").ToArrayAsync();
             return data;
         }
+        public async ValueTask<GenericData[]> SearchCountryFromKingdoms(string name)
+        {
+            var data = await this.Parent.FromSql(
+                $@"select idHDCountry, CountryName as Name 
+                0 as orig, 0 as IDhd
+                from CountryFromKingdoms
+                where CountryName like '%{name}%'").ToArrayAsync();
+            return data;
+        }
+
     }
 }
