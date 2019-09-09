@@ -1,16 +1,23 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { AdvSearchNewService } from '../adv-search-new.service';
 import { NewCountry } from '../NewCountry';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { fromEvent } from 'rxjs';
-import { TouchSequence } from 'selenium-webdriver';
+import { map, filter, debounceTime, distinctUntilChanged, switchMap, concatMap, delay } from 'rxjs/operators';
+import { fromEvent, from, Observable, concat, of } from 'rxjs';
+import { GenericData } from '../classes/interval';
+
 class FoundCountry{
   constructor(){
-    this.ids=[];
+    this.ids=new Map<number,boolean>();
+    this.names=new Map<number,GenericData[]>();
   }
   name: string;
-  ids: Array<number>;
-
+  ids: Map<number,boolean>;
+  names:Map<number,GenericData[]>;
+  public AddId(id: number){
+      this.ids.set(id,false);
+    
+      
+  }
 }
 @Component({
   selector: 'app-adv-search-new',
@@ -25,7 +32,23 @@ export class AdvSearchNewComponent implements OnInit {
   constructor(private  adv: AdvSearchNewService) {
     this.FoundCountries=new Map<string,FoundCountry>();
    }
+   menuOpened(f: FoundCountry){
+     console.log('open'+f.name);
+     var arr=Array.from(f.ids.keys()).filter(it=>!f.ids.get(it));
+     var s = from(arr);
 
+     s.pipe(
+       
+       concatMap(it=>this.adv.GetParent(it).pipe(delay(2000))) ,
+       
+     )
+     .subscribe(res=>{
+        var first=res[0];
+        var id=first.orig;
+        f.ids.set(id,true);
+        f.names.set(id,res);
+     });
+   }
   ngOnInit() {
   //    this.adv.GetCountry(0).subscribe(it=>this.folders=it);
   const searchBox = document.getElementById('textSearch');
@@ -52,7 +75,7 @@ export class AdvSearchNewComponent implements OnInit {
         this.FoundCountries.set(name,f);
         
       }
-      this.FoundCountries.get(name).ids.push(it.id);
+      this.FoundCountries.get(name).AddId(it.id);
       
    });
    console.log('nr:' + this.FoundCountries.size);

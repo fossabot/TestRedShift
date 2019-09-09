@@ -10,15 +10,25 @@
       
   </mat-list-item>
 </mat-list> -->
-<input type="text" id="textSearch" value="Francex">
-<button mat-button [matMenuTriggerFor]="menuCountry">{{FoundCountries?.size}} /{{nrResultsCountries}} </button>
+<input type="text" id="textSearch" value="romani">
+<button mat-button [matMenuTriggerFor]="menuCountry" >{{FoundCountries?.size}} /{{nrResultsCountries}} </button>
 <mat-menu #menuCountry="matMenu" >
-    <ng-container *ngFor="let c of FoundCountries | keyvalue">
-        <button mat-menu-item [matMenuTriggerFor]="sub_menu">
-            {{c.key}}  {{c.value.ids.length}}
+    <ng-container *ngFor="let c of FoundCountries | keyvalue; let i = index">
+        <button mat-menu-item [matMenuTriggerFor]="sub_menu" (menuOpened)="menuOpened(c.value)">
+          {{i+1}}){{c.key}} items: {{c.value.ids.size}}
         </button>
         <mat-menu #sub_menu="matMenu">
-           <button *ngFor="let subItem of c.value.ids" mat-menu-item>{{ subItem }}
+           <button *ngFor="let subItem of c.value.ids | keyvalue; let j = index" mat-menu-item >
+            <span *ngIf="!subItem.value">{{j+1}}loading</span> 
+            <span *ngIf="subItem.value">
+              <div *ngFor="let gd of c.value.names.get(subItem.key)">
+                  <span *ngIf="gd.iDhd==42613" style="color:blue">{{j+1}}</span>
+                <span *ngIf="gd.iDhd>42613">{{gd.name}} -></span>
+              </div>
+              
+
+            </span> 
+            
              
            </button>
         </mat-menu>
