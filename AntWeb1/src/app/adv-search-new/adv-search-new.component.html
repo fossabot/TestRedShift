@@ -10,7 +10,22 @@
       
   </mat-list-item>
 </mat-list> -->
-<input type="text" id="textSearch" value="Francex"> {{nrResultsCountries}}
+<input type="text" id="textSearch" value="Francex">
+<button mat-button [matMenuTriggerFor]="menuCountry">{{FoundCountries?.size}} /{{nrResultsCountries}} </button>
+<mat-menu #menuCountry="matMenu" >
+    <ng-container *ngFor="let c of FoundCountries | keyvalue">
+        <button mat-menu-item [matMenuTriggerFor]="sub_menu">
+            {{c.key}}  {{c.value.ids.length}}
+        </button>
+        <mat-menu #sub_menu="matMenu">
+           <button *ngFor="let subItem of c.value.ids" mat-menu-item>{{ subItem }}
+             
+           </button>
+        </mat-menu>
+  
+    </ng-container>
+
+</mat-menu>
 
 
 <app-country-new ></app-country-new>
