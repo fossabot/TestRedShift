@@ -75,7 +75,15 @@ namespace Ant.Controllers
         {
             try
             {
-                return await t.GetParent(id);
+                string name = nameof(GetParent) + id;
+                if (memoryCache.TryGetValue(name, out GenericData[] ret))
+                {
+                    return ret;
+                }
+                ret = await t.GetParent(id);
+                memoryCache.Set(name, ret);
+                return ret;
+                
             }
             catch (Exception ex)
             {
@@ -95,7 +103,14 @@ namespace Ant.Controllers
         {
             try
             {
-                return await t.SearchCountryFromKingdoms(id);
+                string name = nameof(SearchCountryFromKingdoms) + id;
+                if (memoryCache.TryGetValue(name, out GenericData[] ret))
+                {
+                    return ret;
+                }
+                ret= await t.SearchCountryFromKingdoms(id);
+                memoryCache.Set(name, ret);
+                return ret;
             }
             catch (Exception ex)
             {

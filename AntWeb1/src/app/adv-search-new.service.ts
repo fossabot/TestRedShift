@@ -32,6 +32,13 @@ export class AdvSearchNewService {
     }
     return this.http.get<FindBetweenResult[]>(url);
   }
+  public SearchCountryFromKingdoms(id:string):Observable<GenericData[]>{
+    let url = environment.urlApi +  this.urlAPI + 'SearchCountryFromKingdoms';    
+    
+    url+='/'+id;
+    
+    return this.http.get<GenericData[]>(url);
+  }
   public GetParent(id:number): Observable<GenericData[]>{
     let url= environment.urlApi +  this.urlAPI + 'getparent/'+id;
     return this.http.get<GenericData[]>(url);
