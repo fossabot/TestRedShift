@@ -223,6 +223,7 @@ group by c.idHDCountry, c.CountryName").ToArrayAsync();
                 ,0 as orig, 0 as IDhd
                 from CountryFromKingdoms
                 where CountryName like '%{name}%'").ToArrayAsync();
+            Console.WriteLine($"searching {name} result {data.Length}")
             return data;
         }
 
