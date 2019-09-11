@@ -14,7 +14,7 @@ import { ExpandServiceService } from '../expand-service.service';
 export class CountryNewComponent implements OnInit, AfterViewInit {
   @Input() nc: NewCountry;
   icon : string="folder";
-
+  color: string = "black";
   @ViewChild('scrollToMe') scrollToMe: ElementRef;
   constructor(private adv: AdvSearchNewService, private fs: FoundResultsService,private expand:ExpandServiceService) {
     
@@ -60,6 +60,7 @@ export class CountryNewComponent implements OnInit, AfterViewInit {
 
     if(this.hasChilds(c)){
       c.childs=[];
+      this.color='black';
       return; 
     }
     const name = c.name;
@@ -67,6 +68,7 @@ export class CountryNewComponent implements OnInit, AfterViewInit {
     
     
     this.adv.GetCountry(c.id).subscribe(newIt => {
+      this.color='blue';
       c.childs = newIt.sort((a,b)=>a.name.localeCompare(b.name));
       if(c.childs.length == 0){
         this.icon="";
