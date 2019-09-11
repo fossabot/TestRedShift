@@ -1,21 +1,36 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, AfterViewInit } from "@angular/core";
 import { NewCountry } from "../NewCountry";
 import { AdvSearchNewService } from "../adv-search-new.service";
 import { FoundResultsService } from '../found-results.service';
-import { FindBetweenResult } from '../classes/interval';
+import { FindBetweenResult, Country } from '../classes/interval';
+import { ExpandServiceService } from '../expand-service.service';
 
 @Component({
   selector: "app-country-new",
   templateUrl: "./country-new.component.html",
   styleUrls: ["./country-new.component.css"]
 })
-export class CountryNewComponent implements OnInit {
+export class CountryNewComponent implements OnInit, AfterViewInit {
   @Input() nc: NewCountry;
   icon : string="folder";
-  constructor(private adv: AdvSearchNewService, private fs: FoundResultsService) {
+  constructor(private adv: AdvSearchNewService, private fs: FoundResultsService,private expand:ExpandServiceService) {
     
   }
-
+  ngAfterViewInit() {
+    this.expand.s.subscribe(it=>{
+      if(it == null)
+        return;
+      //console.log(`received from ${this.nc.id} --- ${it.iDhd}`);
+      
+      if(this.nc.id == it.iDhd){
+        console.log('expand');
+        console.log(JSON.stringify(it) );
+        console.log(JSON.stringify(this.nc) );
+        if( !this.hasChilds(this.nc))
+          this.clickCountry(this.nc);
+      }
+    })
+  }
   ngOnInit() {
       if(this.nc === undefined)
       this.adv.GetCountry(0).subscribe(it => {
@@ -23,8 +38,12 @@ export class CountryNewComponent implements OnInit {
         this.nc= it[0];
       });
   }
-  
-
+  hasChilds(c:NewCountry):boolean{
+    return (c.childs ||[]).length>0;
+  }
+  resetChilds(){
+    this.nc.childs=[];
+  }
   clickCountry(c : NewCountry) {
     
     var fArr=[];
@@ -35,7 +54,7 @@ export class CountryNewComponent implements OnInit {
     this.fs.NextRest(fArr);
     this.adv.GetAuthorsNewCountry(c.id).subscribe(it=>this.fs.NextRest(it));
 
-    if((c.childs ||[]).length>0){
+    if(this.hasChilds(c)){
       c.childs=[];
       return; 
     }

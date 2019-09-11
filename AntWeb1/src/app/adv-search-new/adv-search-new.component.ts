@@ -4,6 +4,8 @@ import { NewCountry } from '../NewCountry';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap, concatMap, delay } from 'rxjs/operators';
 import { fromEvent, from, Observable, concat, of } from 'rxjs';
 import { GenericData } from '../classes/interval';
+import { ExpandServiceService } from '../expand-service.service';
+import { CountryNewComponent } from '../country-new/country-new.component';
 
 class FoundCountry{
   constructor(){
@@ -28,12 +30,23 @@ export class AdvSearchNewComponent implements OnInit {
   FoundCountries: Map< string, FoundCountry>;
 
   nrResultsCountries: number;
+  @ViewChild(CountryNewComponent) AllCountry: CountryNewComponent;
   //folders: NewCountry[];
-  constructor(private  adv: AdvSearchNewService) {
+  constructor(private  adv: AdvSearchNewService, private expand:ExpandServiceService) {
     this.FoundCountries=new Map<string,FoundCountry>();
    }
+   expandTo(f: GenericData[]){
+     //window.alert(' we will expand );
+     this.AllCountry.resetChilds();
+     let i:number =0;
+     for(const g of f){
+        i++;
+        this.expand.nextG(g);
+     }
+     this.expand.completeFrom(i);
+   }
    menuOpened(f: FoundCountry){
-     console.log('open'+f.name);
+     
      var arr=Array.from(f.ids.keys()).filter(it=>!f.ids.get(it));
      var s = from(arr);
 
@@ -55,7 +68,7 @@ export class AdvSearchNewComponent implements OnInit {
   const typeahead = fromEvent(searchBox, 'input').pipe(
     map((e: any) => e.currentTarget.value),
     filter(text => text.length > 4),
-    debounceTime(3*1000),
+    debounceTime(1*1000),
     distinctUntilChanged(),  
     switchMap(it=>this.adv.SearchCountryFromKingdoms(it))
 
@@ -78,7 +91,7 @@ export class AdvSearchNewComponent implements OnInit {
       this.FoundCountries.get(name).AddId(it.id);
       
    });
-   console.log('nr:' + this.FoundCountries.size);
+   
   });
 
   }

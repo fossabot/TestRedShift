@@ -23,6 +23,7 @@ import { AboutComponent } from './about/about.component';
 import { VersionsNetcoreAngularModule} from 'versions-netcore-angular';
 import { AdvSearchNewComponent } from './adv-search-new/adv-search-new.component';
 import { CountryNewComponent } from './country-new/country-new.component';
+import { Subject } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,7 @@ import { CountryNewComponent } from './country-new/country-new.component';
      
   ],
   exports:[ScrollingModule],
-  providers: [PeriodService],
+  providers: [PeriodService, Subject],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

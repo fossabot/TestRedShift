@@ -20,7 +20,7 @@
         <mat-menu #sub_menu="matMenu">
            <button *ngFor="let subItem of c.value.ids | keyvalue; let j = index" mat-menu-item >
             <span *ngIf="!subItem.value">{{j+1}}loading</span> 
-            <span *ngIf="subItem.value">
+            <span *ngIf="subItem.value" (click)="expandTo(c.value.names.get(subItem.key))" >
               <div *ngFor="let gd of c.value.names.get(subItem.key)">
                   <span *ngIf="gd.iDhd==42613" style="color:blue">{{j+1}}</span>
                 <span *ngIf="gd.iDhd>42613">{{gd.name}} -></span>
