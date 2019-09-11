@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from "@angular/core";
+import { Component, OnInit, Input, AfterViewInit, ElementRef, ViewChild } from "@angular/core";
 import { NewCountry } from "../NewCountry";
 import { AdvSearchNewService } from "../adv-search-new.service";
 import { FoundResultsService } from '../found-results.service';
@@ -10,9 +10,12 @@ import { ExpandServiceService } from '../expand-service.service';
   templateUrl: "./country-new.component.html",
   styleUrls: ["./country-new.component.css"]
 })
+
 export class CountryNewComponent implements OnInit, AfterViewInit {
   @Input() nc: NewCountry;
   icon : string="folder";
+
+  @ViewChild('scrollToMe') scrollToMe: ElementRef;
   constructor(private adv: AdvSearchNewService, private fs: FoundResultsService,private expand:ExpandServiceService) {
     
   }
@@ -28,6 +31,7 @@ export class CountryNewComponent implements OnInit, AfterViewInit {
         console.log(JSON.stringify(this.nc) );
         if( !this.hasChilds(this.nc))
           this.clickCountry(this.nc);
+          this.scrollToMe.nativeElement.scrollIntoView({ behavior: 'smooth' });
       }
     })
   }
