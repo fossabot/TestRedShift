@@ -10,32 +10,46 @@
       
   </mat-list-item>
 </mat-list> -->
-<input type="text" id="textSearch" value="romani">
-<button mat-button [matMenuTriggerFor]="menuCountry" *ngIf="FoundCountries?.size>0" >{{FoundCountries?.size}} /{{nrResultsCountries}} </button>
-<mat-menu #menuCountry="matMenu" >
-    <ng-container *ngFor="let c of FoundCountries | keyvalue; let i = index">
-        <button mat-menu-item [matMenuTriggerFor]="sub_menu" (menuOpened)="menuOpened(c.value)">
-          {{i+1}}){{c.key}} items: {{c.value.ids.size}}
+<span onclick="document.getElementById('developer').style.display='block'">Dev
+  <span style="display:none" id="developer">
+    <input type="text" id="textSearch" value="romani" />
+    <button
+      mat-button
+      [matMenuTriggerFor]="menuCountry"
+      *ngIf="FoundCountries?.size > 0"
+    >
+      {{ FoundCountries?.size }} /{{ nrResultsCountries }}
+    </button>
+    <mat-menu #menuCountry="matMenu">
+      <ng-container *ngFor="let c of FoundCountries | keyvalue; let i = index">
+        <button
+          mat-menu-item
+          [matMenuTriggerFor]="sub_menu"
+          (menuOpened)="menuOpened(c.value)"
+        >
+          {{ i + 1 }}){{ c.key }} items: {{ c.value.ids.size }}
         </button>
         <mat-menu #sub_menu="matMenu">
-           <button *ngFor="let subItem of c.value.ids | keyvalue; let j = index" mat-menu-item >
-            <span *ngIf="!subItem.value">{{j+1}}loading</span> 
-            <span *ngIf="subItem.value" (click)="expandTo(c.value.names.get(subItem.key))" >
+          <button
+            *ngFor="let subItem of c.value.ids | keyvalue; let j = index"
+            mat-menu-item
+          >
+            <span *ngIf="!subItem.value">{{ j + 1 }}loading</span>
+            <span
+              *ngIf="subItem.value"
+              (click)="expandTo(c.value.names.get(subItem.key))"
+            >
               <div *ngFor="let gd of c.value.names.get(subItem.key)">
-                  <span *ngIf="gd.iDhd==42613" style="color:blue">{{j+1}}</span>
-                <span *ngIf="gd.iDhd>42613">{{gd.name}} -></span>
+                <span *ngIf="gd.iDhd == 42613" style="color:blue">{{
+                  j + 1
+                }}</span>
+                <span *ngIf="gd.iDhd > 42613">{{ gd.name }} -></span>
               </div>
-              
-
-            </span> 
-            
-             
-           </button>
+            </span>
+          </button>
         </mat-menu>
-  
-    </ng-container>
-
-</mat-menu>
-
-
-<app-country-new ></app-country-new>
+      </ng-container>
+    </mat-menu>
+  </span>
+</span>
+<app-country-new></app-country-new>
